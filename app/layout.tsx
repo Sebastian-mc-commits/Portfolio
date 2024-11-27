@@ -9,14 +9,14 @@ import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
 import "@/lib/utils/i18n";
-import mainUser from "@/lib/data/mainUser";
+// import mainUser from "@/lib/data/mainUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: mainUser.name + " | Personal Portfolio",
-  description: "A full-stack developer.",
-};
+// export const metadata = {
+//   title: mainUser.name + " | Personal Portfolio",
+//   description: "A full-stack developer.",
+// };
 
 export default function RootLayout({
   children,
