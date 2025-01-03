@@ -84,6 +84,15 @@ const en = {
 
     e_u_d_courses: `
     Courses completed throughout my education and experience as a software developer.
+    `,
+
+    e_u_d_sintravid: `
+    Sintravid is a healthcare company that required enhanced functionality and design
+    for its WordPress-based website. The requirements included creating custom roles
+    with specific permissions, improving the visual design for a better user experience,
+    implementing a feature to upload resumes, and enabling the upload of documents to a checklist.
+    These functionalities were developed using custom-built plugins, designed and coded specifically
+    for this project.
     `
 }
 
@@ -104,7 +113,10 @@ const enTitles = {
     u_p_t_chatbot: "Automated Intelligent Chatbot",
     u_p_t_e_commerce: "Integrated Ecommerce System",
     u_p_t_bitcoin: "Bitcoin Monitoring Application",
-    u_p_t_classroom: "Class Management Platform"
+    u_p_t_classroom: "Class Management Platform",
+    t_w_tag: "Development for Work",
+    t_p_tag: "Developed for Practice",
+    t_c_tag: "Development for Client"
 }
 
 const enPlaceholders = {

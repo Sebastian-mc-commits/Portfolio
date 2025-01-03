@@ -15,7 +15,7 @@ const AnimatedImageModal: React.FC<AnimatedImageModalProps> = ({ isOpen, onClose
 
     return (
         <AnimatePresence>
-            {isOpen && (
+            {(isOpen && images.length > 1) && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

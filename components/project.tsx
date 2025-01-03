@@ -3,11 +3,13 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { IUserProjects } from "@/lib/interfaces/IUser";
+import { IUserProjects, UserProjectsStates } from "@/lib/interfaces/IUser";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { ImageSelector } from "./ui";
+import { ImageSelector, Label } from "./ui";
 import { FaGithubSquare } from "react-icons/fa";
+import { SiSimilarweb } from "react-icons/si";
+
 
 export default function Project({
   images,
@@ -15,8 +17,9 @@ export default function Project({
   id,
   translationKey,
   type,
-  githubLink,
+  link,
   videoLink,
+  linkType,
   ...filteredProps
 }: IUserProjects) {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,6 +34,12 @@ export default function Project({
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
   const title = "title" in filteredProps ? filteredProps.title : t(filteredProps.translationTitleKey)
 
+  const tagText: { [K in UserProjectsStates]: string; } = {
+    forAClient: "t_c_tag",
+    forWork: "t_w_tag",
+    ownProject: "t_p_tag"
+  }
+
   return (
     <motion.div
       ref={ref}
@@ -40,7 +49,7 @@ export default function Project({
       }}
       className="group mb-3 sm:mb-8 last:mb-0"
     >
-      <section className="bg-gray-100 max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
+      <section className="bg-gray-100 max-w-[50rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-[25rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
         <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
           <h3 className="text-2xl font-semibold">{title}</h3>
           <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
@@ -61,12 +70,8 @@ export default function Project({
         {
           images[0]?.alt &&
 
-          <Image
+          <button
             onClick={() => setIsModalOpen(true)}
-            role="button"
-            src={images[0].src}
-            alt={images[0].alt ?? "Project"}
-            quality={95}
             className="absolute hidden sm:block top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-2xl
         transition 
         group-hover:scale-[1.04]
@@ -79,7 +84,13 @@ export default function Project({
         group-even:group-hover:rotate-2
 
         group-even:right-[initial] group-even:-left-40"
-          />
+          >
+            <Image
+              src={images[0].src}
+              alt={images[0].alt ?? "Project"}
+              quality={95}
+            />
+          </button>
         }
 
       </section>
@@ -89,7 +100,7 @@ export default function Project({
       px-4 text-lg font-medium
       ">
         {
-          githubLink &&
+          link &&
           <Link
             className="bg-white p-4 
             text-gray-700 flex items-center
@@ -98,10 +109,11 @@ export default function Project({
             hover:text-gray-950 active:scale-105
             transition cursor-pointer borderBlack
             dark:bg-white/10 dark:text-white/60 w-auto"
-            href={githubLink}
+            href={link}
             target="_blank"
           >
-            <FaGithubSquare />
+            {linkType === "website" ? (<SiSimilarweb />) : (<FaGithubSquare />)}
+
           </Link>
         }
         {
@@ -109,6 +121,8 @@ export default function Project({
             <Link href={videoLink}>Video del proyecto</Link>
           </button>
         }
+
+        <Label type={type} text={t(tagText[type])} />
 
         <ImageSelector
           isOpen={isModalOpen}

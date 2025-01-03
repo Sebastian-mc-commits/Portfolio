@@ -22,7 +22,6 @@ export default function About() {
       <SectionHeading>{t("t_about")}</SectionHeading>
       <p className="mb-3">{t("about")}</p>
 
-      <p>{t("about_personal")}</p>
     </motion.section>
   );
 }

@@ -72,7 +72,7 @@ export default function Contact() {
         />
         <SubmitBtn />
       </form>
-      <WhatsAppButton message="Hello" phoneNumber="5" value={t("b_contact_whatsapp")} />
+      <WhatsAppButton message="Hola, me interesa tu trabajo. ¿Podemos hablar sobre una posible colaboración?" phoneNumber="3023492663" value={t("b_contact_whatsapp")} />
     </motion.section>
   );
 }

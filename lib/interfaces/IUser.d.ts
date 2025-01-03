@@ -7,7 +7,7 @@ export interface IUser {
     age: number;
 }
 
-type UserProjectsStates = "ownProject" | "forWork";
+export type UserProjectsStates = "ownProject" | "forWork" | "forAClient";
 
 type BaseUserUserProject = {
     id: string;
@@ -15,8 +15,9 @@ type BaseUserUserProject = {
     images: I_Image[];
     translationKey: string;
     type: UserProjectsStates;
-    githubLink?: string;
+    link: string;
     videoLink?: string;
+    linkType: "github" | "website";
 };
 
 export type IUserProjects =
