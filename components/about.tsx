@@ -20,7 +20,7 @@ export default function About() {
       id="about"
     >
       <SectionHeading>{t("t_about")}</SectionHeading>
-      <p className="mb-3">{t("about")}</p>
+      <p className="mb-3">{t("p_about")}</p>
 
     </motion.section>
   );

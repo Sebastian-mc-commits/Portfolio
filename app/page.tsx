@@ -12,6 +12,7 @@ import { ChangeLanguage } from "@/components/ui/buttons";
 export default function Home() {
   return (
     <main className="flex flex-col items-center px-4">
+
       <ChangeLanguage />
       <Intro />
       <SectionDivider />
@@ -19,7 +20,7 @@ export default function Home() {
       <Projects />
       <Skills />
       <Experience />
-      <Contact />
+      {/* <Contact /> */}
     </main>
   );
 }

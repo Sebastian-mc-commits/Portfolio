@@ -7,6 +7,7 @@ import ISO29119 from "@/public/images/courses/ISO 29119_page-0001.jpg"
 import ISO31000 from "@/public/images/courses/ISO 31000_page-0001.jpg"
 import ISO9001 from "@/public/images/courses/ISO 9001_page-0001.jpg"
 import ComputerScienceDegree from "@/public/images/courses/SENA TITULO_page-0001.jpg"
+import Copnia from "@/public/images/courses/COPNIA.png"
 import Testing from "@/public/images/courses/TESTING_page-0001.jpg"
 
 const experienceImages: I_Image[] = [
@@ -51,6 +52,11 @@ const experienceImages: I_Image[] = [
 export const computerScienceDegree: I_Image = {
     alt: "Sena degree",
     src: ComputerScienceDegree
+}
+
+export const copniaImage: I_Image = {
+    alt: "Professional Certification COPNIA",
+    src: Copnia
 }
 
 export default experienceImages;

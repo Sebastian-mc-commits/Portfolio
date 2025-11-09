@@ -21,6 +21,7 @@
     "framer-motion": "^10.12.17",
     "i18next": "^24.0.2",
     "i18next-http-backend": "^3.0.1",
+    "lucide-react": "^0.552.0",
     "next": "13.4.8",
     "nodemailer": "^6.9.16",
     "postcss": "8.4.24",
