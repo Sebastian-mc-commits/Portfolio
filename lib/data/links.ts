@@ -24,11 +24,11 @@ const links = [
     translationKey: "m_experience",
     hash: "#experience",
   },
-  // {
-  //   name: "Contact",
-  //   translationKey: "m_contact",
-  //   hash: "#contact",
-  // },
+  {
+    name: "Contact",
+    translationKey: "m_contact",
+    hash: "#contact",
+  },
 ] as const;
 
 export default links

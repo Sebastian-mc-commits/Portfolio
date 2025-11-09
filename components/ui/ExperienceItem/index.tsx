@@ -107,13 +107,13 @@ function ExperienceItem(item: IExperience) {
                         </div>
 
                         {/* Images Grid */}
-                        {item?.images && item?.images.length > 0 && (
+                        {item.type === "degrees_images" && item.images && item.images.length > 0 && (
                             <div>
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     {t("images") || "Images & Certificates"}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {item.images.map((image, index) => (
+                                    {item.type === "degrees_images" && item.images.map((image, index) => (
                                         <motion.div
                                             key={index}
                                             whileHover={{ scale: 1.02 }}
