@@ -184,35 +184,67 @@
         }
         
         @media print {
+            @page { size: Letter; margin: 0; }
             body {
-                font-size: 10pt;
-                padding: 0.5in;
+                font-size: 8pt;
+                padding: 0.25in 0.4in;
                 margin: 0;
                 max-width: none;
-            }
-            .section-title {
-                font-size: 11pt;
-                page-break-after: avoid;
-            }
-            .name {
-                font-size: 14pt;
-            }
-            .subsection {
-                page-break-inside: avoid;
+                line-height: 1.2;
             }
             .header {
+                padding-bottom: 5pt;
+                margin-bottom: 6pt;
+                gap: 10pt;
                 page-break-after: avoid;
             }
-            .profile-image {
-                max-width: 80pt;
-                max-height: 80pt;
+            .name { font-size: 11.5pt; margin-bottom: 1pt; letter-spacing: 0.3pt; }
+            .subtitle { font-size: 9pt; margin-bottom: 2pt; }
+            .contact-info { font-size: 7.5pt; line-height: 1.18; }
+            .section-title {
+                font-size: 9pt;
+                margin-top: 5pt;
+                margin-bottom: 3pt;
+                padding-bottom: 1pt;
+                page-break-after: avoid;
             }
-            .projects-grid {
-                display: block;
-            }
-            .skill-item {
+            .subsection {
+                margin-bottom: 3.5pt;
                 page-break-inside: avoid;
             }
+            .job-title, .company { font-size: 9pt; }
+            .date { font-size: 8pt; }
+            .description {
+                font-size: 8.5pt;
+                line-height: 1.22;
+                margin-bottom: 3pt;
+                margin-left: 10pt;
+            }
+            .skills-list {
+                gap: 3pt;
+                margin-left: 10pt;
+                margin-bottom: 3pt;
+            }
+            .skill-item {
+                padding: 1.5pt 5pt;
+                font-size: 7.5pt;
+                page-break-inside: avoid;
+            }
+            .profile-image {
+                width: 64pt;
+                height: 64pt;
+                padding: 2pt;
+            }
+            .education-item { margin-bottom: 1pt; }
+            .degree, .institution { font-size: 9pt; }
+            .projects-grid {
+                display: block;
+                margin-left: 10pt;
+            }
+            .project-item { margin-bottom: 4pt; page-break-inside: avoid; }
+            .project-title { font-size: 8.5pt; margin-bottom: 0; }
+            .project-description { font-size: 8pt; line-height: 1.22; }
+            .tech-stack { font-size: 7.5pt; margin-top: 0; }
         }
     </style>
 </head>
@@ -223,7 +255,7 @@
             <div class="subtitle">Desarrollador Full-Stack | Especialista Backend | Edad: 21</div>
             <div class="contact-info">
                 <span class="contact-label">Email:</span> sm9349168@gmail.com | <span class="contact-label">Teléfono:</span> +57 3205012455<br>
-                <span class="contact-label">Portafolio:</span> https://portfolio-umber-five-71.vercel.app/#projects<br
+                <span class="contact-label">Portafolio:</span> https://portfolio-umber-five-71.vercel.app/?mode=quick&visitor=HR%20Viewer<br
                 <span class="contact-label">LinkedIn:</span> https://www.linkedin.com/in/sebastian-machado-89a476192/<br>
                 <span class="contact-label">GitHub:</span> https://github.com/Sebastian-mc-commits?tab=repositories<br>
                 <span class="contact-label">Ubicación:</span> Colombia | <span class="contact-label">Disponibilidad:</span> Trabajo Remoto
@@ -238,172 +270,170 @@
     </div>
 
     <div class="section-title">Experiencia Profesional</div>
-    
+
     <div class="subsection">
         <div class="job-header">
             <div>
-                <span class="job-title">Desarrollador de Software</span> - <span class="company">Geeks5g</span>
+                <span class="job-title">Lead Developer</span> | <span class="company">Geeks5g</span>
             </div>
-            <div class="date">Nov 2025 - Presente</div>
+            <div class="date">Feb 2026 - Presente</div>
         </div>
         <div class="description">
-            Especializándome en desarrollo backend y soluciones de automatización. Enfoque en construir aplicaciones robustas del lado del servidor, implementar procesos automatizados y desarrollar arquitecturas backend escalables usando tecnologías modernas y mejores prácticas de la industria.
+            Liderando equipos de desarrollo y arquitectando servicios backend escalables. Responsable de decisiones técnicas, revisiones de código, mentoría a desarrolladores junior y asegurando buenas prácticas en múltiples proyectos de clientes en paralelo.
         </div>
     </div>
 
     <div class="subsection">
         <div class="job-header">
             <div>
-                <span class="job-title">Técnico de Fábrica de Software</span> - <span class="company">Universidad Distrital</span>
+                <span class="job-title">Desarrollador Full Stack</span> | <span class="company">Geeks5g</span>
             </div>
-            <div class="date">Jul 2023 - Ene 2025</div>
+            <div class="date">Ene 2025 - Feb 2026</div>
         </div>
         <div class="description">
-            Gestioné proyectos de desarrollo de software con enfoque organizado y realista. Serví como líder técnico en múltiples iniciativas, colaboré con equipos de desarrollo y adquirí amplia experiencia práctica con prácticas de desarrollo modernas. Contribuí a varias tareas de desarrollo de software manteniendo altos estándares de calidad de código.
+            Construí aplicaciones full-stack con React/Next.js en el frontend y FastAPI + PostgreSQL en el backend. Implementé pipelines asíncronos con Celery y Redis, integré servicios de terceros y entregué flujos de automatización usados en producción.
         </div>
     </div>
 
     <div class="subsection">
         <div class="job-header">
             <div>
-                <span class="job-title">Desarrollador de Escritorio</span> - <span class="company">Bitac</span>
+                <span class="job-title">Auxiliar de Desarrollo de Software</span> | <span class="company">SENA</span>
             </div>
-            <div class="date">Ene 2023 - Feb 2023</div>
+            <div class="date">May 2024 - Ene 2025</div>
         </div>
         <div class="description">
-            Desarrollé una aplicación de escritorio integral automatizando flujos de trabajo manuales de impresión y procesamiento de órdenes. Implementé soluciones eficientes que mejoraron significativamente la eficiencia operacional y redujeron la carga de trabajo manual.
+            Apoyé a desarrolladores senior en la construcción y mantenimiento de aplicaciones. Adquirí experiencia práctica con metodologías ágiles, control de versiones y prácticas de desarrollo colaborativo en un entorno de equipo estructurado.
         </div>
     </div>
+
 
     <div class="section-title">Educación</div>
     <div class="education-item">
         <div>
-            <span class="degree">Técnico en Análisis y Desarrollo de Sistemas</span><br>
-            <span class="institution">Programa de Sistemas de Información</span>
+            <span class="degree">Ingeniería Informática</span> <span class="institution">— En curso</span>
+        </div>
+        <div class="date">En curso</div>
+    </div>
+    <div class="education-item">
+        <div>
+            <span class="degree">Tecnología en Análisis y Desarrollo de Sistemas de Información</span> <span class="institution">— SENA</span>
         </div>
         <div class="date">2022 - 2024</div>
     </div>
 
     <div class="section-title">Habilidades Técnicas</div>
-    
-    <div style="margin-bottom: 8pt;">
-        <strong>Tecnologías Frontend:</strong>
+
+    <div style="margin-bottom: 6pt;">
+        <strong>Backend:</strong>
         <div class="skills-list">
-            <span class="skill-item">React (Experto)</span>
-            <span class="skill-item">Next.js (Experto)</span>
-            <span class="skill-item">TypeScript (Experto)</span>
-            <span class="skill-item">JavaScript (Experto)</span>
-            <span class="skill-item">HTML5/CSS3 (Experto)</span>
-            <span class="skill-item">Tailwind CSS (Experto)</span>
-            <span class="skill-item">Framer Motion (Avanzado)</span>
-            <span class="skill-item">Redux (Avanzado)</span>
+            <span class="skill-item">Python</span>
+            <span class="skill-item">FastAPI</span>
+            <span class="skill-item">NestJS</span>
+            <span class="skill-item">Node.js</span>
+            <span class="skill-item">Express.js</span>
+            <span class="skill-item">PHP</span>
+            <span class="skill-item">Rust</span>
         </div>
     </div>
 
-    <div style="margin-bottom: 8pt;">
-        <strong>Tecnologías Backend:</strong>
+    <div style="margin-bottom: 6pt;">
+        <strong>Bases de Datos y Almacenamiento:</strong>
         <div class="skills-list">
-            <span class="skill-item">Node.js (Experto)</span>
-            <span class="skill-item">Express.js (Experto)</span>
-            <span class="skill-item">PHP (Avanzado)</span>
-            <span class="skill-item">Python (Avanzado)</span>
-            <span class="skill-item">Rust (Principiante/Entusiasta)</span>
+            <span class="skill-item">PostgreSQL</span>
+            <span class="skill-item">MySQL</span>
+            <span class="skill-item">MongoDB</span>
+            <span class="skill-item">Redis</span>
+            <span class="skill-item">SQLAlchemy</span>
+            <span class="skill-item">AWS S3</span>
         </div>
     </div>
 
-    <div style="margin-bottom: 8pt;">
-        <strong>Bases de Datos y Nube:</strong>
+    <div style="margin-bottom: 6pt;">
+        <strong>Frontend:</strong>
         <div class="skills-list">
-            <span class="skill-item">MongoDB (Experto)</span>
-            <span class="skill-item">MySQL (Experto)</span>
-            <span class="skill-item">Prisma (Avanzado)</span>
-            <span class="skill-item">PostgreSQL (Avanzado)</span>
-            <span class="skill-item">Docker (Intermedio)</span>
-            <span class="skill-item">AWS (Principiante)</span>
-            <span class="skill-item">Google Cloud (Principiante)</span>
-            <span class="skill-item">Vercel (Avanzado)</span>
+            <span class="skill-item">React</span>
+            <span class="skill-item">Next.js</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Tailwind CSS</span>
+            <span class="skill-item">HTML5/CSS3</span>
         </div>
     </div>
 
-    <div style="margin-bottom: 8pt;">
-        <strong>IA y Automatización:</strong>
+    <div style="margin-bottom: 6pt;">
+        <strong>Asíncrono, Automatización y Nube:</strong>
         <div class="skills-list">
-            <span class="skill-item">ChatGPT API (Avanzado)</span>
-            <span class="skill-item">Integración OpenAI (Avanzado)</span>
-            <span class="skill-item">Automatización IA (Avanzado)</span>
-            <span class="skill-item">Flujos n8n (Avanzado)</span>
+            <span class="skill-item">Celery</span>
+            <span class="skill-item">Kafka</span>
+            <span class="skill-item">Selenium</span>
+            <span class="skill-item">Playwright</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">AWS</span>
+            <span class="skill-item">Google Cloud</span>
+            <span class="skill-item">Vercel</span>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 6pt;">
+        <strong>WordPress e IA:</strong>
+        <div class="skills-list">
+            <span class="skill-item">WordPress</span>
+            <span class="skill-item">Plugins Personalizados</span>
+            <span class="skill-item">Integración OpenAI</span>
+            <span class="skill-item">Desarrollo asistido por IA</span>
         </div>
     </div>
 
     <div class="section-title">Proyectos Destacados</div>
-    
+
     <div class="projects-grid">
         <div class="project-item">
-            <div class="project-title">Sistema de Automatización Traffic Bot</div>
+            <div class="project-title">NextGen Taxman · Plataforma Contable</div>
             <div class="project-description">
-                Sistema inteligente de automatización para gestión de tráfico con soluciones algorítmicas avanzadas y capacidades de procesamiento de datos en tiempo real.
+                SaaS contable multi-tenant que gestiona facturación, pago a proveedores, nómina y conciliación bancaria. Backend orientado a eventos con workers asíncronos y un dashboard tipado.
             </div>
-            <div class="tech-stack">Tecnologías: Node.js, APIs IA, Framework de Automatización</div>
+            <div class="tech-stack">Tecnologías: NestJS, Next.js 15, Kafka, PostgreSQL, Redis, AWS Cognito, TypeScript</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">Plataforma de Análisis Heat Map</div>
+            <div class="project-title">Sistema de Heatmap de Ranking SEO</div>
             <div class="project-description">
-                Plataforma avanzada de visualización de datos proporcionando análisis integral de mapas de calor con dashboards interactivos e insights en tiempo real.
+                Análisis geográfico de rankings procesando datasets densos de palabras clave, generando mapas de calor por coordenadas y reportes de visibilidad competitiva.
             </div>
-            <div class="tech-stack">Tecnologías: React, TypeScript, Visualización de Datos</div>
+            <div class="tech-stack">Tecnologías: Python, FastAPI, PostgreSQL, Redis, Celery, NumPy, Pandas</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">Plataforma SINTRAVID Healthcare</div>
+            <div class="project-title">API de Firma de Contratos</div>
             <div class="project-description">
-                Sistema integral de gestión sanitaria con funcionalidad mejorada, diseño moderno y experiencia de usuario mejorada para profesionales médicos.
+                Servicio empresarial de firma de contratos con almacenamiento en AWS S3, flujo de firma criptográfica y trazabilidad legal completa.
             </div>
-            <div class="tech-stack">Tecnologías: MERN Stack, APIs Healthcare</div>
+            <div class="tech-stack">Tecnologías: Python, FastAPI, AWS S3, PostgreSQL, JWT</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">Automatización de Procesos BITAC</div>
+            <div class="project-title">Servicio Lead Scrapper</div>
             <div class="project-description">
-                Aplicación de escritorio automatizando flujos de trabajo manuales de impresión y procesamiento de órdenes, mejorando significativamente la eficiencia operacional.
+                Crawler distribuido para Google My Business en ubicaciones globales, con rotación de proxies, colas asíncronas y registros normalizados de leads.
             </div>
-            <div class="tech-stack">Tecnologías: Desarrollo Escritorio, Automatización de Procesos</div>
+            <div class="tech-stack">Tecnologías: Python, FastAPI, Selenium, PostgreSQL, Redis, Celery</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">Gestión de API de Contratos</div>
+            <div class="project-title">Plugin Page City Matrix</div>
             <div class="project-description">
-                Sistema robusto de API para gestión de contratos con manejo seguro de datos, flujos de trabajo automatizados y documentación integral.
+                Plugin de WordPress que genera páginas SEO por cada ciudad seleccionada, complementado con un servicio de contenidos en FastAPI.
             </div>
-            <div class="tech-stack">Tecnologías: Node.js, Express.js, Diseño de Base de Datos</div>
+            <div class="tech-stack">Tecnologías: PHP, WordPress, MySQL, Python, FastAPI, React</div>
         </div>
 
-        <div class="project-item">
-            <div class="project-title">Integración WordPress IA</div>
-            <div class="project-description">
-                Plataforma WordPress avanzada mejorada con capacidades de IA, proporcionando gestión inteligente de contenido e interacciones automatizadas con usuarios.
-            </div>
-            <div class="tech-stack">Tecnologías: WordPress, APIs IA, PHP</div>
-        </div>
     </div>
 
     <div class="section-title">Idiomas y Habilidades Interpersonales</div>
     <div class="subsection">
-        <strong>Idiomas:</strong> Español (Nativo), Inglés (B2 - Avanzado)<br>
-        <strong>Habilidades Profesionales:</strong> Resolución de Problemas (Experto), Liderazgo de Equipos (Avanzado), Gestión de Proyectos, Documentación Técnica, Revisión de Código, Metodologías Ágiles
-    </div>
-
-    <div class="section-title">Portafolio y Presencia Online</div>
-    <div class="description">
-        <strong>Sitio Web Portafolio:</strong> https://portfolio-umber-five-71.vercel.app/#projects<br>
-        <strong>Perfil GitHub:</strong> https://github.com/Sebastian-mc-commits?tab=repositories<br>
-        <strong>LinkedIn:</strong> https://www.linkedin.com/in/sebastian-machado-89a476192/<br><br>
-        Consulta mi portafolio completo mostrando proyectos interactivos, expertise técnico y trayectoria de desarrollo profesional. Todos los proyectos incluyen demostraciones en vivo, código fuente y documentación técnica detallada.
-    </div>
-
-    <div class="section-title">Certificaciones y Aprendizaje Continuo</div>
-    <div class="description">
-        Completé múltiples cursos de desarrollo profesional a lo largo de mi educación y carrera como desarrollador de software. Comprometido con el aprendizaje continuo y mantenerme actualizado con tecnologías emergentes, particularmente en automatización con IA, computación en la nube y frameworks de desarrollo modernos.
+        <strong>Idiomas:</strong> Español (Nativo), Inglés (B2)<br>
+        <strong>Habilidades Profesionales:</strong> Resolución de Problemas, Colaboración en Equipo, Documentación Técnica, Revisión de Código, Metodologías Ágiles
     </div>
 </body>
 </html>

@@ -12,6 +12,7 @@ import { IUserProjects } from "@/lib/interfaces/IUser";
 import { MouseEvent } from "react";
 import { useActiveSectionContext } from "@/context/active-section-context";
 import { getTechIconConfig } from "@/components/ui/TechStackTag";
+import { FadeInImage } from "@/components/ui/FadeInImage";
 
 const MountedContext = createContext(false);
 
@@ -143,7 +144,7 @@ function ProjectCard({ project, index, total, cardWidth, scrollYProgress, t }: P
       >
         <div className="absolute inset-0 w-full h-full">
           {images[0] ? (
-            <Image
+            <FadeInImage
               src={images[0].src}
               alt={images[0].alt ?? title}
               fill
@@ -345,7 +346,7 @@ export function HorizontalScrollGallery({
               filter: "blur(1.5px) saturate(1.15) contrast(1.05)",
             }}
           >
-            <Image
+            <FadeInImage
               src={focusedImage}
               alt="Focused project background"
               fill

@@ -184,35 +184,67 @@
         }
         
         @media print {
+            @page { size: Letter; margin: 0; }
             body {
-                font-size: 10pt;
-                padding: 0.5in;
+                font-size: 8pt;
+                padding: 0.25in 0.4in;
                 margin: 0;
                 max-width: none;
-            }
-            .section-title {
-                font-size: 11pt;
-                page-break-after: avoid;
-            }
-            .name {
-                font-size: 14pt;
-            }
-            .subsection {
-                page-break-inside: avoid;
+                line-height: 1.2;
             }
             .header {
+                padding-bottom: 5pt;
+                margin-bottom: 6pt;
+                gap: 10pt;
                 page-break-after: avoid;
             }
-            .profile-image {
-                max-width: 80pt;
-                max-height: 80pt;
+            .name { font-size: 11.5pt; margin-bottom: 1pt; letter-spacing: 0.3pt; }
+            .subtitle { font-size: 9pt; margin-bottom: 2pt; }
+            .contact-info { font-size: 7.5pt; line-height: 1.18; }
+            .section-title {
+                font-size: 9pt;
+                margin-top: 5pt;
+                margin-bottom: 3pt;
+                padding-bottom: 1pt;
+                page-break-after: avoid;
             }
-            .projects-grid {
-                display: block;
-            }
-            .skill-item {
+            .subsection {
+                margin-bottom: 3.5pt;
                 page-break-inside: avoid;
             }
+            .job-title, .company { font-size: 9pt; }
+            .date { font-size: 8pt; }
+            .description {
+                font-size: 8.5pt;
+                line-height: 1.22;
+                margin-bottom: 3pt;
+                margin-left: 10pt;
+            }
+            .skills-list {
+                gap: 3pt;
+                margin-left: 10pt;
+                margin-bottom: 3pt;
+            }
+            .skill-item {
+                padding: 1.5pt 5pt;
+                font-size: 7.5pt;
+                page-break-inside: avoid;
+            }
+            .profile-image {
+                width: 64pt;
+                height: 64pt;
+                padding: 2pt;
+            }
+            .education-item { margin-bottom: 1pt; }
+            .degree, .institution { font-size: 9pt; }
+            .projects-grid {
+                display: block;
+                margin-left: 10pt;
+            }
+            .project-item { margin-bottom: 4pt; page-break-inside: avoid; }
+            .project-title { font-size: 8.5pt; margin-bottom: 0; }
+            .project-description { font-size: 8pt; line-height: 1.22; }
+            .tech-stack { font-size: 7.5pt; margin-top: 0; }
         }
     </style>
 </head>
@@ -223,7 +255,7 @@
             <div class="subtitle">Full-Stack Software Developer | Backend Specialist | Age: 21</div>
             <div class="contact-info">
                 <span class="contact-label">Email:</span> sm9349168@gmail.com | <span class="contact-label">Phone:</span> +57 3205012455<br>
-                <span class="contact-label">Portfolio:</span> https://portfolio-umber-five-71.vercel.app/#projects<br>
+                <span class="contact-label">Portfolio:</span> https://portfolio-umber-five-71.vercel.app/?mode=quick&visitor=HR%20Viewer<br>
                 <span class="contact-label">LinkedIn:</span> https://www.linkedin.com/in/sebastian-machado-89a476192/<br>
                 <span class="contact-label">GitHub:</span> https://github.com/Sebastian-mc-commits?tab=repositories<br>
                 <span class="contact-label">Location:</span> Colombia | <span class="contact-label">Availability:</span> Remote Work
@@ -238,172 +270,170 @@
     </div>
 
     <div class="section-title">Professional Experience</div>
-    
+
     <div class="subsection">
         <div class="job-header">
             <div>
-                <span class="job-title">Software Developer</span> - <span class="company">Geeks5g</span>
+                <span class="job-title">Lead Developer</span> | <span class="company">Geeks5g</span>
             </div>
-            <div class="date">Nov 2025 - Present</div>
+            <div class="date">Feb 2026 - Present</div>
         </div>
         <div class="description">
-            Specializing in backend development and automation solutions. Focus on building robust server-side applications, implementing automated processes, and developing scalable backend architectures using modern technologies and industry best practices.
+            Leading development teams and architecting scalable backend services. Responsible for technical decisions, code reviews, mentoring junior developers, and ensuring best practices across multiple concurrent client projects.
         </div>
     </div>
 
     <div class="subsection">
         <div class="job-header">
             <div>
-                <span class="job-title">Software Factory Technician</span> - <span class="company">Universidad Distrital</span>
+                <span class="job-title">Full Stack Developer</span> | <span class="company">Geeks5g</span>
             </div>
-            <div class="date">Jul 2023 - Jan 2025</div>
+            <div class="date">Jan 2025 - Feb 2026</div>
         </div>
         <div class="description">
-            Managed software development projects with organized and realistic approach. Served as technical lead on multiple initiatives, collaborated with development teams, and gained extensive hands-on experience with modern development practices. Contributed to various software development tasks while maintaining high code quality standards.
+            Built full-stack applications with React/Next.js on the frontend and FastAPI + PostgreSQL on the backend. Implemented async pipelines with Celery and Redis, integrated third-party services, and shipped automation workflows used in production.
         </div>
     </div>
 
     <div class="subsection">
         <div class="job-header">
             <div>
-                <span class="job-title">Desktop Developer</span> - <span class="company">Bitac</span>
+                <span class="job-title">Software Development Assistant</span> | <span class="company">SENA</span>
             </div>
-            <div class="date">Jan 2023 - Feb 2023</div>
+            <div class="date">May 2024 - Jan 2025</div>
         </div>
         <div class="description">
-            Developed comprehensive desktop application automating manual printing and order processing workflows. Implemented efficient solutions that significantly improved operational efficiency and reduced manual workload.
+            Supported senior developers in building and maintaining applications. Gained hands-on experience with agile methodologies, version control, and collaborative development practices in a structured team environment.
         </div>
     </div>
+
 
     <div class="section-title">Education</div>
     <div class="education-item">
         <div>
-            <span class="degree">Technical Degree in Systems Analysis and Development</span><br>
-            <span class="institution">Information Systems Program</span>
+            <span class="degree">Informatic Engineering</span> <span class="institution">— In progress</span>
+        </div>
+        <div class="date">Ongoing</div>
+    </div>
+    <div class="education-item">
+        <div>
+            <span class="degree">Technology in Information Systems Analysis &amp; Development</span> <span class="institution">— SENA</span>
         </div>
         <div class="date">2022 - 2024</div>
     </div>
 
     <div class="section-title">Technical Skills</div>
-    
-    <div style="margin-bottom: 8pt;">
-        <strong>Frontend Technologies:</strong>
+
+    <div style="margin-bottom: 6pt;">
+        <strong>Backend:</strong>
         <div class="skills-list">
-            <span class="skill-item">React (Expert)</span>
-            <span class="skill-item">Next.js (Expert)</span>
-            <span class="skill-item">TypeScript (Expert)</span>
-            <span class="skill-item">JavaScript (Expert)</span>
-            <span class="skill-item">HTML5/CSS3 (Expert)</span>
-            <span class="skill-item">Tailwind CSS (Expert)</span>
-            <span class="skill-item">Framer Motion (Advanced)</span>
-            <span class="skill-item">Redux (Advanced)</span>
+            <span class="skill-item">Python</span>
+            <span class="skill-item">FastAPI</span>
+            <span class="skill-item">NestJS</span>
+            <span class="skill-item">Node.js</span>
+            <span class="skill-item">Express.js</span>
+            <span class="skill-item">PHP</span>
+            <span class="skill-item">Rust</span>
         </div>
     </div>
 
-    <div style="margin-bottom: 8pt;">
-        <strong>Backend Technologies:</strong>
+    <div style="margin-bottom: 6pt;">
+        <strong>Databases &amp; Storage:</strong>
         <div class="skills-list">
-            <span class="skill-item">Node.js (Expert)</span>
-            <span class="skill-item">Express.js (Expert)</span>
-            <span class="skill-item">PHP (Advanced)</span>
-            <span class="skill-item">Python (Advanced)</span>
-            <span class="skill-item">Rust (Beginner/Enthusiast)</span>
+            <span class="skill-item">PostgreSQL</span>
+            <span class="skill-item">MySQL</span>
+            <span class="skill-item">MongoDB</span>
+            <span class="skill-item">Redis</span>
+            <span class="skill-item">SQLAlchemy</span>
+            <span class="skill-item">AWS S3</span>
         </div>
     </div>
 
-    <div style="margin-bottom: 8pt;">
-        <strong>Database & Cloud:</strong>
+    <div style="margin-bottom: 6pt;">
+        <strong>Frontend:</strong>
         <div class="skills-list">
-            <span class="skill-item">MongoDB (Expert)</span>
-            <span class="skill-item">MySQL (Expert)</span>
-            <span class="skill-item">Prisma (Advanced)</span>
-            <span class="skill-item">PostgreSQL (Advanced)</span>
-            <span class="skill-item">Docker (Intermediate)</span>
-            <span class="skill-item">AWS (Beginner)</span>
-            <span class="skill-item">Google Cloud (Beginner)</span>
-            <span class="skill-item">Vercel (Advanced)</span>
+            <span class="skill-item">React</span>
+            <span class="skill-item">Next.js</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Tailwind CSS</span>
+            <span class="skill-item">HTML5/CSS3</span>
         </div>
     </div>
 
-    <div style="margin-bottom: 8pt;">
-        <strong>AI & Automation:</strong>
+    <div style="margin-bottom: 6pt;">
+        <strong>Async, Automation &amp; Cloud:</strong>
         <div class="skills-list">
-            <span class="skill-item">ChatGPT API (Advanced)</span>
-            <span class="skill-item">OpenAI Integration (Advanced)</span>
-            <span class="skill-item">AI Automation (Advanced)</span>
-            <span class="skill-item">n8n Workflows (Advanced)</span>
+            <span class="skill-item">Celery</span>
+            <span class="skill-item">Kafka</span>
+            <span class="skill-item">Selenium</span>
+            <span class="skill-item">Playwright</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">AWS</span>
+            <span class="skill-item">Google Cloud</span>
+            <span class="skill-item">Vercel</span>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 6pt;">
+        <strong>WordPress &amp; AI:</strong>
+        <div class="skills-list">
+            <span class="skill-item">WordPress</span>
+            <span class="skill-item">Custom Plugins</span>
+            <span class="skill-item">OpenAI Integration</span>
+            <span class="skill-item">AI-assisted Development</span>
         </div>
     </div>
 
     <div class="section-title">Key Projects</div>
-    
+
     <div class="projects-grid">
         <div class="project-item">
-            <div class="project-title">Traffic Bot Automation System</div>
+            <div class="project-title">NextGen Taxman · Accounting Platform</div>
             <div class="project-description">
-                Intelligent automation system for traffic management with advanced algorithmic solutions and real-time data processing capabilities.
+                Multi-tenant accounting SaaS handling invoicing, bill-pay, payroll, and bank reconciliation. Event-driven backend with async workers and a typed dashboard.
             </div>
-            <div class="tech-stack">Tech: Node.js, AI APIs, Automation Framework</div>
+            <div class="tech-stack">Tech: NestJS, Next.js 15, Kafka, PostgreSQL, Redis, AWS Cognito, TypeScript</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">Heat Map Analytics Platform</div>
+            <div class="project-title">SEO Ranking Heatmap System</div>
             <div class="project-description">
-                Advanced data visualization platform providing comprehensive heat map analytics with interactive dashboards and real-time insights.
+                Geographic ranking analysis processing dense keyword datasets, generating coordinate-based heatmaps and competitor visibility reports.
             </div>
-            <div class="tech-stack">Tech: React, TypeScript, Data Visualization</div>
+            <div class="tech-stack">Tech: Python, FastAPI, PostgreSQL, Redis, Celery, NumPy, Pandas</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">SINTRAVID Healthcare Platform</div>
+            <div class="project-title">Contract Signing API</div>
             <div class="project-description">
-                Comprehensive healthcare management system with enhanced functionality, modern design, and improved user experience for medical professionals.
+                Enterprise contract signing service with AWS S3 storage, cryptographic signature flow, and legally compliant document trails.
             </div>
-            <div class="tech-stack">Tech: MERN Stack, Healthcare APIs</div>
+            <div class="tech-stack">Tech: Python, FastAPI, AWS S3, PostgreSQL, JWT</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">BITAC Process Automation</div>
+            <div class="project-title">Lead Scrapper Service</div>
             <div class="project-description">
-                Desktop application automating manual printing and order processing workflows, significantly improving operational efficiency.
+                Distributed crawler for Google My Business across worldwide locations, with proxy rotation, queueing, and normalized lead records.
             </div>
-            <div class="tech-stack">Tech: Desktop Development, Process Automation</div>
+            <div class="tech-stack">Tech: Python, FastAPI, Selenium, PostgreSQL, Redis, Celery</div>
         </div>
 
         <div class="project-item">
-            <div class="project-title">Contracts API Management</div>
+            <div class="project-title">Page City Matrix Plugin</div>
             <div class="project-description">
-                Robust API system for contract management with secure data handling, automated workflows, and comprehensive documentation.
+                WordPress plugin that generates SEO-optimized location pages for each selected city, paired with a FastAPI content service.
             </div>
-            <div class="tech-stack">Tech: Node.js, Express.js, Database Design</div>
+            <div class="tech-stack">Tech: PHP, WordPress, MySQL, Python, FastAPI, React</div>
         </div>
 
-        <div class="project-item">
-            <div class="project-title">WordPress AI Integration</div>
-            <div class="project-description">
-                Advanced WordPress platform enhanced with AI capabilities, providing intelligent content management and automated user interactions.
-            </div>
-            <div class="tech-stack">Tech: WordPress, AI APIs, PHP</div>
-        </div>
     </div>
 
-    <div class="section-title">Languages & Soft Skills</div>
+    <div class="section-title">Languages &amp; Soft Skills</div>
     <div class="subsection">
-        <strong>Languages:</strong> Spanish (Native), English (B2 - Advanced)<br>
-        <strong>Professional Skills:</strong> Problem Solving (Expert), Team Leadership (Advanced), Project Management, Technical Documentation, Code Review, Agile Methodologies
-    </div>
-
-    <div class="section-title">Portfolio & Online Presence</div>
-    <div class="description">
-        <strong>Portfolio Website:</strong> https://portfolio-umber-five-71.vercel.app/#projects<br>
-        <strong>GitHub Profile:</strong> https://github.com/Sebastian-mc-commits?tab=repositories<br>
-        <strong>LinkedIn:</strong> https://www.linkedin.com/in/sebastian-machado-89a476192/<br><br>
-        View my complete portfolio showcasing interactive projects, technical expertise, and professional development journey. All projects include live demos, source code, and detailed technical documentation.
-    </div>
-
-    <div class="section-title">Certifications & Continuous Learning</div>
-    <div class="description">
-        Completed multiple professional development courses throughout education and career as a software developer. Committed to continuous learning and staying current with emerging technologies, particularly in AI automation, cloud computing, and modern development frameworks.
+        <strong>Languages:</strong> Spanish (Native), English (B2)<br>
+        <strong>Professional Skills:</strong> Problem Solving, Team Collaboration, Technical Documentation, Code Review, Agile Methodologies
     </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import Image from "next/image";
+import { FadeInImage } from "@/components/ui/FadeInImage";
 import { motion, useAnimationControls } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FaChevronDown, FaDocker, FaAws, FaGraduationCap, FaBriefcase } from "react-icons/fa";
@@ -357,7 +357,7 @@ export default function QuickSummary({ onScrollDown }: QuickSummaryProps) {
                                         >
                                             {thumbnail && (
                                                 <div className="relative w-20 h-20 flex-shrink-0 rounded overflow-hidden bg-gray-100 dark:bg-white/5">
-                                                    <Image
+                                                    <FadeInImage
                                                         src={thumbnail.src}
                                                         alt={thumbnail.alt}
                                                         fill

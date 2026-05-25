@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { FadeInImage } from "./ui/FadeInImage";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsLinkedin } from "react-icons/bs";
@@ -56,7 +56,7 @@ export default function Intro() {
               duration: 0.2,
             }}
           >
-            <Image
+            <FadeInImage
               src={ProfilePhoto}
               alt={mainUser.name}
               width={200}
