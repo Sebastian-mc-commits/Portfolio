@@ -76,6 +76,11 @@ html.dark {
 
 html {
   --line-color: #e5e7eb;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
 }
 
 /* Dark mode line color - commented out

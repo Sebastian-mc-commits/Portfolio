@@ -81,7 +81,6 @@ export default function Projects() {
       </div>
       */}
 
-      {/* Horizontal scroll gallery - default view */}
       <HorizontalScrollGallery
         projects={projectsData}
         t={t}

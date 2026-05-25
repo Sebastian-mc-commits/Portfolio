@@ -74,7 +74,7 @@ function HomeContent() {
         )}
       </AnimatePresence>
 
-      <main ref={mainContentRef} className="relative flex flex-col items-center px-4">
+      <main ref={mainContentRef} className="relative flex flex-col items-center px-5 sm:px-4">
         {/* Up arrow to return to QuickSummary - positioned to the right of the profile photo */}
         <AnimatePresence>
           {quickModeEnabled && !showQuickSummary && (

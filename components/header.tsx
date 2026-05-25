@@ -71,17 +71,18 @@ export default function Header() {
     <AnimatePresence mode="wait">
       {!isInProjectsView && (
         <motion.header
-          className="z-[999] relative h-[4.5rem] sm:h-[5rem]"
+          className="hidden md:block z-[999] relative h-[4.5rem] sm:h-[5rem]"
           initial={false}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           data-testid="main-header"
         >
-          <nav className="fixed top-0 left-1/2 -translate-x-1/2 h-[4.5rem] sm:top-6 sm:h-[2.75rem] flex items-center justify-center">
+          <nav className="hidden md:flex fixed top-0 left-1/2 -translate-x-1/2 h-[4.5rem] sm:top-6 sm:h-[2.75rem] items-center justify-center">
+            {/* DESKTOP: pill nav */}
             <motion.div
               className={clsx(
-                "flex items-center h-full px-1.5 sm:px-3 rounded-full border shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] max-w-[calc(100vw-1rem)] overflow-x-auto no-scrollbar",
+                "flex items-center h-full px-3 rounded-full border shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem]",
                 isOnProjectPage
                   ? "bg-black/20 border-white/10"
                   : "bg-white bg-opacity-80 border-border-subtle dark:bg-surface-secondary dark:border-border-subtle dark:bg-opacity-90"
@@ -90,7 +91,7 @@ export default function Header() {
               animate={{ y: 0, opacity: 1 }}
             >
               <ul className={clsx(
-                "flex items-center justify-center gap-0.5 text-[0.7rem] font-medium sm:text-[0.85rem]",
+                "flex items-center justify-center gap-0.5 text-[0.85rem] font-medium",
                 isOnProjectPage ? `${textClass} opacity-70` : "text-gray-500"
               )} style={isOnProjectPage ? textStyle : undefined}>
                 {links.map((link) => (
@@ -102,7 +103,7 @@ export default function Header() {
                   >
                     <Link
                       className={clsx(
-                        "flex items-center justify-center px-1.5 sm:px-2.5 py-1 transition whitespace-nowrap rounded-full",
+                        "flex items-center justify-center px-2.5 py-1 transition whitespace-nowrap rounded-full",
                         isOnProjectPage
                           ? "hover:opacity-100"
                           : "hover:text-gray-950 dark:text-gray-500 dark:hover:text-gray-300",

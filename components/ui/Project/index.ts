@@ -12,4 +12,5 @@ export { ProjectSlide } from "./ProjectSlide";
 export { ProgressDot } from "./ProgressDot";
 export { ProjectSectionSlide } from "./ProjectSectionSlide";
 export { HorizontalScrollGallery } from "./HorizontalScrollGallery";
+export { MobileProjectStack } from "./MobileProjectStack";
 export { BentoGrid } from "./BentoGrid";

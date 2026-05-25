@@ -1,36 +1,38 @@
-import { chromium, devices } from "playwright";
+import { chromium } from "playwright";
 
-const iPhone = devices["iPhone 13"];
 const browser = await chromium.launch();
-const context = await browser.newContext({ ...iPhone });
+const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
 const page = await context.newPage();
-
-page.on("pageerror", (err) => console.log("[browser error]", err.message));
-page.on("console", (msg) => {
-    if (msg.type() === "error" || msg.type() === "warn") {
-        console.log(`[browser ${msg.type()}]`, msg.text().slice(0, 200));
-    }
-});
 
 try {
     await page.goto("http://localhost:3000/", { waitUntil: "networkidle", timeout: 60000 });
-    await page.waitForTimeout(5000);
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await page.waitForTimeout(1000);
-    await page.screenshot({ path: "C:/tmp/mobile-home-fresh.png", fullPage: false });
-    console.log("ok screenshot");
+    await page.waitForTimeout(3500);
 
-    const introInfo = await page.evaluate(() => {
-        const img = document.querySelector("#home img");
-        const h1 = document.querySelector("#home h1");
+    await page.evaluate(() => document.querySelector("#skills")?.scrollIntoView({ behavior: "instant" }));
+    await page.waitForTimeout(1500);
+    await page.screenshot({ path: "C:/tmp/mobile-skills.png", fullPage: false });
+    console.log("ok skills");
+
+    // Inspect skills section dimensions
+    const info = await page.evaluate(() => {
+        const sec = document.querySelector("#skills");
+        if (!sec) return { found: false };
+        const r = sec.getBoundingClientRect();
+        const cs = window.getComputedStyle(sec);
         return {
-            imgClass: img?.className,
-            imgComputed: img ? window.getComputedStyle(img).opacity : null,
-            imgComplete: img?.complete,
-            h1Text: h1?.textContent?.slice(0, 80),
+            found: true,
+            left: r.left,
+            right: r.right,
+            width: r.width,
+            top: r.top,
+            paddingLeft: cs.paddingLeft,
+            paddingRight: cs.paddingRight,
+            marginLeft: cs.marginLeft,
+            marginRight: cs.marginRight,
+            textAlign: cs.textAlign,
         };
     });
-    console.log("intro:", JSON.stringify(introInfo, null, 2));
+    console.log("skills section:", JSON.stringify(info, null, 2));
 } catch (e) {
     console.error("error:", e.message);
 } finally {

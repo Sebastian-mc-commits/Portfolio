@@ -17,7 +17,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <section ref={ref} id="skills" className="mb-28 max-w-[53rem] scroll-mt-36 text-center sm:mb-40 mx-auto">
+    <section ref={ref} id="skills" className="mb-28 w-full max-w-[53rem] scroll-mt-36 text-center sm:mb-40 mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
