@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "ai-content-backend",
+    "title": "AI Content Backend",
+    "description": "AI-powered content generation: a brief becomes a retrieval-augmented prompt, an LLM produces a draft, and the result is stored with embeddings for later reuse."
+  },
+  "flow": {
+    "title": "Brief-to-Draft Flow",
+    "description": "A brief enters, relevant context is retrieved from a vector store, a prompt is built and sent to the LLM, the draft is post-processed, embedded and stored.",
+    "domains": [
+      { "id": "ingest", "name": "Ingest", "description": "Brief submission and tenant context.", "color": "#3b82f6" },
+      { "id": "retrieval", "name": "Retrieval", "description": "Vector search over previous content and tenant knowledge.", "color": "#8b5cf6" },
+      { "id": "generation", "name": "Generation", "description": "Prompt build, LLM call and post-processing.", "color": "#f59e0b" },
+      { "id": "persistence", "name": "Persistence", "description": "Drafts, embeddings and history.", "color": "#10b981" }
+    ],
+    "steps": [
+      {
+        "id": "submit-brief",
+        "title": "Submit Brief",
+        "role": "entry",
+        "domain": "ingest",
+        "description": "Tenant submits a brief: topic, tone, length, target audience.",
+        "inputs": ["brief"],
+        "outputs": ["generation job"],
+        "nextSteps": ["retriever"]
+      },
+      {
+        "id": "retriever",
+        "title": "Retriever",
+        "role": "service",
+        "domain": "retrieval",
+        "description": "Embeds the brief and searches the vector store for related prior content for the same tenant.",
+        "inputs": ["generation job"],
+        "outputs": ["context passages"],
+        "nextSteps": ["vector-store", "prompt-builder"]
+      },
+      {
+        "id": "vector-store",
+        "title": "Vector Store",
+        "role": "store",
+        "domain": "retrieval",
+        "description": "Indexed embeddings of prior drafts and tenant-supplied source material.",
+        "inputs": ["embedding query"],
+        "outputs": ["nearest passages"],
+        "nextSteps": []
+      },
+      {
+        "id": "prompt-builder",
+        "title": "Prompt Builder",
+        "role": "service",
+        "domain": "generation",
+        "description": "Assembles the final prompt: brief + retrieved context + tone instructions.",
+        "inputs": ["generation job", "context passages"],
+        "outputs": ["prompt"],
+        "nextSteps": ["llm-call"]
+      },
+      {
+        "id": "llm-call",
+        "title": "LLM Call",
+        "role": "external",
+        "domain": "generation",
+        "description": "Calls the language-model provider with the assembled prompt.",
+        "inputs": ["prompt"],
+        "outputs": ["raw draft"],
+        "nextSteps": ["post-processor"]
+      },
+      {
+        "id": "post-processor",
+        "title": "Post-Processor",
+        "role": "worker",
+        "domain": "generation",
+        "description": "Cleans up formatting, runs a uniqueness check against past drafts and computes the embedding of the final draft.",
+        "inputs": ["raw draft"],
+        "outputs": ["final draft", "draft embedding"],
+        "nextSteps": ["draft-store", "vector-store"]
+      },
+      {
+        "id": "draft-store",
+        "title": "Draft Store",
+        "role": "store",
+        "domain": "persistence",
+        "description": "Keeps the final draft linked to its brief and to the context passages used.",
+        "inputs": ["final draft"],
+        "outputs": ["draft record"],
+        "nextSteps": ["draft-response"]
+      },
+      {
+        "id": "draft-response",
+        "title": "Draft Response",
+        "role": "output",
+        "domain": "persistence",
+        "description": "Returns the draft to the client with provenance (which passages, which model, when).",
+        "inputs": ["draft record"],
+        "outputs": ["draft payload"],
+        "nextSteps": []
+      }
+    ]
+  }
+}

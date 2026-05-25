@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "accounting-platform",
+    "title": "Accounting & Bookkeeping Platform",
+    "description": "Multi-tenant accounting platform: a business manages its ledger, invoices, bills, payments, payroll and supporting documents through one API."
+  },
+  "flow": {
+    "title": "Core Business Flows",
+    "description": "Four major flows run side-by-side: invoicing money in, bill-pay sending money out, bank reconciliation aligning the ledger with reality, and payroll paying employees. All share a common identity + document substrate.",
+    "domains": [
+      { "id": "identity", "name": "Identity & Access", "description": "Authenticates tenants and enforces who can act on a business profile.", "color": "#3b82f6" },
+      { "id": "finance", "name": "Finance & Payments", "description": "Money-in (invoices) and money-out (bills, payroll) flowing through a payment processor.", "color": "#10b981" },
+      { "id": "accounting", "name": "Accounting Core", "description": "Chart of accounts, ledger entries, and the bank reconciliation engine.", "color": "#f59e0b" },
+      { "id": "documents", "name": "Documents", "description": "Attachments, statements and exports tied to the rest of the system.", "color": "#8b5cf6" }
+    ],
+    "steps": [
+      {
+        "id": "api-gateway",
+        "title": "API Gateway",
+        "role": "entry",
+        "domain": "identity",
+        "description": "All requests enter here. Validates the access token and resolves the active business profile.",
+        "inputs": ["http request", "access token"],
+        "outputs": ["authenticated request"],
+        "nextSteps": ["profile-resolver"]
+      },
+      {
+        "id": "profile-resolver",
+        "title": "Business Profile Resolver",
+        "role": "service",
+        "domain": "identity",
+        "description": "Picks the active business profile for the caller and loads which feature modules are enabled.",
+        "inputs": ["authenticated request"],
+        "outputs": ["business context"],
+        "nextSteps": ["invoice-service", "bill-pay-service", "reconciliation-service", "payroll-service"]
+      },
+      {
+        "id": "invoice-service",
+        "title": "Invoice Service",
+        "role": "service",
+        "domain": "finance",
+        "description": "Creates and updates invoices for a customer. Lines roll up to a total; status moves draft → sent → paid.",
+        "inputs": ["customer id", "line items"],
+        "outputs": ["invoice"],
+        "nextSteps": ["ledger-writer", "payment-processor", "document-store"]
+      },
+      {
+        "id": "bill-pay-service",
+        "title": "Bill-Pay Service",
+        "role": "service",
+        "domain": "finance",
+        "description": "Receives a vendor bill, schedules a payment and applies it against the right account.",
+        "inputs": ["vendor id", "bill lines"],
+        "outputs": ["bill", "payment instruction"],
+        "nextSteps": ["payment-processor", "ledger-writer"]
+      },
+      {
+        "id": "payment-processor",
+        "title": "Payment Processor",
+        "role": "external",
+        "domain": "finance",
+        "description": "Third-party gateway that captures cards or initiates bank transfers and webhooks the result back.",
+        "inputs": ["payment instruction"],
+        "outputs": ["charge", "webhook event"],
+        "nextSteps": ["webhook-handler"]
+      },
+      {
+        "id": "webhook-handler",
+        "title": "Payment Webhook Handler",
+        "role": "worker",
+        "domain": "finance",
+        "description": "Receives async events from the payment processor and updates the invoice/bill status accordingly.",
+        "inputs": ["webhook event"],
+        "outputs": ["status update"],
+        "nextSteps": ["ledger-writer"]
+      },
+      {
+        "id": "reconciliation-service",
+        "title": "Bank Reconciliation Service",
+        "role": "service",
+        "domain": "accounting",
+        "description": "Accepts an uploaded bank statement and opens a reconciliation session.",
+        "inputs": ["bank statement file"],
+        "outputs": ["reconciliation session"],
+        "nextSteps": ["match-engine"]
+      },
+      {
+        "id": "match-engine",
+        "title": "Match Engine",
+        "role": "worker",
+        "domain": "accounting",
+        "description": "Parses statement lines and matches each one to ledger entries. Anything unmatched is queued as an exception.",
+        "inputs": ["statement lines", "ledger entries"],
+        "outputs": ["matches", "exceptions"],
+        "nextSteps": ["reconciliation-report"]
+      },
+      {
+        "id": "reconciliation-report",
+        "title": "Reconciliation Report",
+        "role": "output",
+        "domain": "accounting",
+        "description": "Surfaces matches, adjustments and outstanding items back to the user.",
+        "inputs": ["matches", "exceptions"],
+        "outputs": ["reconciliation report"],
+        "nextSteps": []
+      },
+      {
+        "id": "payroll-service",
+        "title": "Payroll Service",
+        "role": "service",
+        "domain": "finance",
+        "description": "Runs payroll for the active period, computing taxes and per-employee compensation.",
+        "inputs": ["payroll period", "employees"],
+        "outputs": ["employee payments"],
+        "nextSteps": ["payment-processor", "ledger-writer"]
+      },
+      {
+        "id": "ledger-writer",
+        "title": "Ledger Writer",
+        "role": "store",
+        "domain": "accounting",
+        "description": "Posts double-entry rows to the appropriate accounts in the chart of accounts.",
+        "inputs": ["financial event"],
+        "outputs": ["ledger entries"],
+        "nextSteps": []
+      },
+      {
+        "id": "document-store",
+        "title": "Document Store",
+        "role": "store",
+        "domain": "documents",
+        "description": "Stores invoices, bills and uploaded attachments. Files are linked to their owning business profile.",
+        "inputs": ["document"],
+        "outputs": ["file reference"],
+        "nextSteps": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "managed-storage-api",
+    "title": "Managed Storage API",
+    "description": "A managed key/value storage API: tenants store and retrieve records via API keys, and a scheduled job periodically validates the URLs they've stored."
+  },
+  "flow": {
+    "title": "Storage & Validation Flow",
+    "description": "Each request is authenticated against an API key and reads or writes a record; a separate scheduled worker periodically validates stored URLs and writes back their status.",
+    "domains": [
+      { "id": "access", "name": "Access Control", "description": "API keys, tenants and audit.", "color": "#3b82f6" },
+      { "id": "records", "name": "Records", "description": "The actual stored key/value records.", "color": "#10b981" },
+      { "id": "validation", "name": "Validation Jobs", "description": "Scheduled checks against external URLs.", "color": "#f59e0b" }
+    ],
+    "steps": [
+      {
+        "id": "api-request",
+        "title": "API Request",
+        "role": "entry",
+        "domain": "access",
+        "description": "Client sends a read or write call with an API key.",
+        "inputs": ["http request", "api key"],
+        "outputs": ["authed request"],
+        "nextSteps": ["api-key-validator"]
+      },
+      {
+        "id": "api-key-validator",
+        "title": "API Key Validator",
+        "role": "service",
+        "domain": "access",
+        "description": "Looks up the key, verifies it isn't revoked or rate-limited, resolves the owning tenant.",
+        "inputs": ["api key"],
+        "outputs": ["tenant context"],
+        "nextSteps": ["record-service", "audit-log"]
+      },
+      {
+        "id": "record-service",
+        "title": "Record Service",
+        "role": "service",
+        "domain": "records",
+        "description": "Reads or writes a record for the tenant. URL fields are flagged for the validator.",
+        "inputs": ["tenant context", "record payload"],
+        "outputs": ["record"],
+        "nextSteps": ["record-store"]
+      },
+      {
+        "id": "record-store",
+        "title": "Record Store",
+        "role": "store",
+        "domain": "records",
+        "description": "Primary store of records, keyed by tenant + record id.",
+        "inputs": ["record"],
+        "outputs": ["stored record"],
+        "nextSteps": []
+      },
+      {
+        "id": "audit-log",
+        "title": "Audit Log",
+        "role": "store",
+        "domain": "access",
+        "description": "Append-only log of every access event (who, when, what).",
+        "inputs": ["tenant context", "request metadata"],
+        "outputs": ["audit row"],
+        "nextSteps": []
+      },
+      {
+        "id": "validation-scheduler",
+        "title": "Validation Scheduler",
+        "role": "worker",
+        "domain": "validation",
+        "description": "Cron job that wakes up and picks records whose URLs are due for revalidation.",
+        "inputs": ["cron tick"],
+        "outputs": ["validation batch"],
+        "nextSteps": ["url-validator"]
+      },
+      {
+        "id": "url-validator",
+        "title": "URL Validator",
+        "role": "worker",
+        "domain": "validation",
+        "description": "Issues an HTTP HEAD/GET against each URL and captures status + last-checked time.",
+        "inputs": ["validation batch"],
+        "outputs": ["validation result"],
+        "nextSteps": ["record-store"]
+      }
+    ]
+  }
+}

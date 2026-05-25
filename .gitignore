@@ -34,3 +34,20 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /training
+
+# claude code local settings
+.claude/
+
+# playwright test output
+/playwright-report/
+/test-results/
+
+# root-level debug screenshots / scratch images
+/anim-*.png
+/final-*.png
+/new-*.png
+/screenshot-*.png
+/split-*.png
+/ss[0-9]*.png
+/test-[0-9]*.png
+/visitor-*.png

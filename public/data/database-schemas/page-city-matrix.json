@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "geo-pages-engine",
+    "title": "Geographic Pages Engine",
+    "description": "Generates one landing page per geographic area from a single template — used to scale local SEO across hundreds of locations."
+  },
+  "flow": {
+    "title": "Template-to-Page Flow",
+    "description": "A user defines a page template and a set of locations; a worker fans out, generates one page per location with location-specific content, and publishes the batch.",
+    "domains": [
+      { "id": "authoring", "name": "Authoring", "description": "Templates, location selection, configuration.", "color": "#3b82f6" },
+      { "id": "generation", "name": "Generation", "description": "Workers that materialize a page per location.", "color": "#f59e0b" },
+      { "id": "publishing", "name": "Publishing", "description": "Pages, status and analytics.", "color": "#10b981" }
+    ],
+    "steps": [
+      {
+        "id": "define-template",
+        "title": "Define Template",
+        "role": "entry",
+        "domain": "authoring",
+        "description": "User builds a template with placeholders for city, region and services.",
+        "inputs": ["template body"],
+        "outputs": ["template record"],
+        "nextSteps": ["pick-locations"]
+      },
+      {
+        "id": "pick-locations",
+        "title": "Pick Locations",
+        "role": "service",
+        "domain": "authoring",
+        "description": "User selects a list of geographic areas to generate pages for.",
+        "inputs": ["template record", "location ids"],
+        "outputs": ["generation plan"],
+        "nextSteps": ["generation-worker"]
+      },
+      {
+        "id": "generation-worker",
+        "title": "Generation Worker",
+        "role": "worker",
+        "domain": "generation",
+        "description": "For each location, hydrates the template with location-specific data and saves the resulting page.",
+        "inputs": ["generation plan"],
+        "outputs": ["generated page"],
+        "nextSteps": ["location-data", "page-store"]
+      },
+      {
+        "id": "location-data",
+        "title": "Locations Service",
+        "role": "external",
+        "domain": "generation",
+        "description": "Master data source for geographic locations (name, slug, region, images).",
+        "inputs": ["location id"],
+        "outputs": ["location metadata"],
+        "nextSteps": []
+      },
+      {
+        "id": "page-store",
+        "title": "Page Store",
+        "role": "store",
+        "domain": "publishing",
+        "description": "Persists each generated page with its slug, parent template and status.",
+        "inputs": ["generated page"],
+        "outputs": ["page record"],
+        "nextSteps": ["publisher"]
+      },
+      {
+        "id": "publisher",
+        "title": "Publisher",
+        "role": "service",
+        "domain": "publishing",
+        "description": "Pushes the batch of pages to the live CMS and flips status to published.",
+        "inputs": ["page record"],
+        "outputs": ["published page"],
+        "nextSteps": []
+      }
+    ]
+  }
+}

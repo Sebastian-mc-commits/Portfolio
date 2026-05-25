@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "geo-rank-analytics",
+    "title": "Geographic Ranking Analytics",
+    "description": "Given a business location and a keyword, produces a heatmap of how that business ranks on local search across a grid of nearby points."
+  },
+  "flow": {
+    "title": "Scan & Score Flow",
+    "description": "A scan request is split into a grid of geographic points; each point is scored against the keyword; ranks are aggregated into a heatmap, stored and returned.",
+    "domains": [
+      { "id": "identity", "name": "Identity & Tokens", "description": "Users, white-label tenants and the token economy that gates scan usage.", "color": "#3b82f6" },
+      { "id": "scan", "name": "Scan Pipeline", "description": "Distributes work, calls the search provider and scores results per grid point.", "color": "#ef4444" },
+      { "id": "analytics", "name": "Analytics & History", "description": "Aggregates results into a heatmap and keeps history for trend analysis.", "color": "#10b981" }
+    ],
+    "steps": [
+      {
+        "id": "scan-request",
+        "title": "Scan Request",
+        "role": "entry",
+        "domain": "identity",
+        "description": "User submits a business + keyword + scan size. The request is bound to their account.",
+        "inputs": ["business location", "keyword", "scan size"],
+        "outputs": ["scan request"],
+        "nextSteps": ["token-gate"]
+      },
+      {
+        "id": "token-gate",
+        "title": "Token Gate",
+        "role": "service",
+        "domain": "identity",
+        "description": "Decrements the user's token balance based on the scan's grid size before any expensive work runs.",
+        "inputs": ["scan request"],
+        "outputs": ["authorized scan"],
+        "nextSteps": ["grid-builder"]
+      },
+      {
+        "id": "grid-builder",
+        "title": "Grid Builder",
+        "role": "service",
+        "domain": "scan",
+        "description": "Turns the business location + scan size into a grid of latitude/longitude points to test.",
+        "inputs": ["authorized scan"],
+        "outputs": ["grid points"],
+        "nextSteps": ["scoring-worker"]
+      },
+      {
+        "id": "scoring-worker",
+        "title": "Scoring Worker",
+        "role": "worker",
+        "domain": "scan",
+        "description": "For each grid point, asks the search provider where the target business ranks for the keyword. Runs in parallel across the grid.",
+        "inputs": ["grid points", "keyword"],
+        "outputs": ["scored points"],
+        "nextSteps": ["search-provider", "rank-aggregator"]
+      },
+      {
+        "id": "search-provider",
+        "title": "Search Provider",
+        "role": "external",
+        "domain": "scan",
+        "description": "Third-party local search API. The worker calls it once per grid point.",
+        "inputs": ["coordinate", "keyword"],
+        "outputs": ["ranked results"],
+        "nextSteps": []
+      },
+      {
+        "id": "rank-aggregator",
+        "title": "Rank Aggregator",
+        "role": "worker",
+        "domain": "analytics",
+        "description": "Computes the average rank, relevance buckets and total ranks across the whole grid.",
+        "inputs": ["scored points"],
+        "outputs": ["aggregated metrics"],
+        "nextSteps": ["heatmap-store", "history-store"]
+      },
+      {
+        "id": "heatmap-store",
+        "title": "Heatmap Store",
+        "role": "store",
+        "domain": "analytics",
+        "description": "Persists the latest heatmap and its metadata so the UI can render it.",
+        "inputs": ["aggregated metrics", "scored points"],
+        "outputs": ["heatmap record"],
+        "nextSteps": ["heatmap-response"]
+      },
+      {
+        "id": "history-store",
+        "title": "History Store",
+        "role": "store",
+        "domain": "analytics",
+        "description": "Keeps prior scans for the same business so the UI can show month-over-month trend.",
+        "inputs": ["heatmap record"],
+        "outputs": ["history entry"],
+        "nextSteps": []
+      },
+      {
+        "id": "heatmap-response",
+        "title": "Heatmap Response",
+        "role": "output",
+        "domain": "analytics",
+        "description": "Returns the rendered heatmap, summary metrics and a link to past scans.",
+        "inputs": ["heatmap record"],
+        "outputs": ["heatmap payload"],
+        "nextSteps": []
+      }
+    ]
+  }
+}

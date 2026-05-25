@@ -3,12 +3,10 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { BsArrowRight, BsLinkedin } from "react-icons/bs";
+import { BsLinkedin } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
-import { useActiveSectionContext } from "@/context/active-section-context";
 import ProfilePhoto from "@/public/images/Sebas_M.jpg"
 import { useTranslation } from "react-i18next";
 import mainUser from "@/lib/data/mainUser";
@@ -22,16 +20,20 @@ import {
 } from "./ui/ProgrammingIcon";
 
 export default function Intro() {
-  const { ref } = useSectionInView("Home", 0.5);
-  const { t, i18n } = useTranslation()
-  const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
-  const [isSidePanelOpened, setIsSidePanelOpened] = useState(false);
-  const [shouldShowStickyButton, setShouldShowStickyButton] = useState(false);
+  const { ref } = useSectionInView("Home", 0.4);
+  const { t, i18n } = useTranslation();
+  const [isMounted, setIsMounted] = useState(false);
+  // const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+  // const [isSidePanelOpened, setIsSidePanelOpened] = useState(false);
+  // const [shouldShowStickyButton, setShouldShowStickyButton] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShouldShowStickyButton(true);
+      // setShouldShowStickyButton(true);
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -43,7 +45,7 @@ export default function Intro() {
       id="home"
       className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]"
     >
-      <SideBarAbilities isOpen={isSidePanelOpened} onClose={() => setIsSidePanelOpened(false)} />
+      {/* <SideBarAbilities isOpen={isSidePanelOpened} onClose={() => setIsSidePanelOpened(false)} /> */}
       <div className="flex items-center justify-center">
         <div className="relative">
           <motion.div
@@ -57,10 +59,11 @@ export default function Intro() {
             <Image
               src={ProfilePhoto}
               alt={mainUser.name}
-              width="200"
-              height="200"
-              quality="95"
+              width={200}
+              height={200}
+              quality={95}
               priority={true}
+              placeholder="blur"
               className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
           </motion.div>
@@ -71,8 +74,9 @@ export default function Intro() {
         className="mb-10 mt-4 px-4 text-1xl font-medium !leading-[1.5] sm:text-4xl"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
+        suppressHydrationWarning
       >
-        {t("presentation")}
+        {isMounted ? t("presentation") : null}
       </motion.h1>
 
       <motion.div
@@ -83,24 +87,14 @@ export default function Intro() {
           delay: 0.1,
         }}
       >
-        {/* <Link
-          href="#contact"
-          className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
-          onClick={() => {
-            setActiveSection("Contact");
-            setTimeOfLastClick(Date.now());
-          }}
-        >
-          {t("b_contact")}{" "}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
-        </Link> */}
 
         <a
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
-          href={i18n.language === "en" ? "/PDF/en_CV_v2.pdf" : "/PDF/CV_v2.pdf"}
+          href={isMounted ? (i18n.language === "en" ? "/PDF/en_CV_v2.pdf" : "/PDF/CV_v2.pdf") : "/PDF/en_CV_v2.pdf"}
           download
+          suppressHydrationWarning
         >
-          {t("b_resume")}{" "}
+          <span suppressHydrationWarning>{isMounted ? t("b_resume") : "Resume"}</span>{" "}
           <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
         </a>
 
@@ -120,8 +114,7 @@ export default function Intro() {
           <FaGithubSquare />
         </a>
 
-        {/* Sticky Button */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {!isSidePanelOpened && (
             <motion.div
               initial={{ opacity: 0, scale: 0, x: 100 }}
@@ -173,7 +166,6 @@ export default function Intro() {
                   )
                 }
 
-                {/* Tooltip */}
                 <div className="absolute -bottom-12 right-0 bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
                   {t("intro_side_panel_title") || "Technical Expertise"}
                   <div className="absolute top-0 right-4 transform -translate-y-1 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-black dark:border-b-white" />
@@ -181,7 +173,7 @@ export default function Intro() {
               </motion.button>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </motion.div>
     </section>
   );
@@ -240,7 +232,6 @@ const SideBarAbilities = ({ isOpen, onClose }: SideBarAbilitiesProps) => {
       pushMode="shrink"
     >
       <div className="h-full bg-white dark:bg-black p-6 overflow-y-auto">
-        {/* Header */}
         <motion.div
           className="mb-8 border-b border-gray-200 dark:border-gray-800 pb-6"
           initial={{ opacity: 0, y: -20 }}
@@ -255,7 +246,6 @@ const SideBarAbilities = ({ isOpen, onClose }: SideBarAbilitiesProps) => {
           </p>
         </motion.div>
 
-        {/* Knowledge Section */}
         <motion.section
           className="mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -304,7 +294,6 @@ const SideBarAbilities = ({ isOpen, onClose }: SideBarAbilitiesProps) => {
           </div>
         </motion.section>
 
-        {/* Approach Section */}
         <motion.section
           className="mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -350,7 +339,6 @@ const SideBarAbilities = ({ isOpen, onClose }: SideBarAbilitiesProps) => {
           </div>
         </motion.section>
 
-        {/* AI Usage Section */}
         <motion.section
           className="mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -396,7 +384,6 @@ const SideBarAbilities = ({ isOpen, onClose }: SideBarAbilitiesProps) => {
           </div>
         </motion.section>
 
-        {/* Specialties Section */}
         <motion.section
           className="mb-6"
           initial={{ opacity: 0, y: 20 }}
@@ -442,7 +429,6 @@ const SideBarAbilities = ({ isOpen, onClose }: SideBarAbilitiesProps) => {
           </div>
         </motion.section>
 
-        {/* Close Button */}
         <motion.div
           className="sticky bottom-0 pt-6 bg-white dark:bg-black"
           initial={{ opacity: 0 }}

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "lead-discovery",
+    "title": "Lead Discovery Service",
+    "description": "Finds business leads in a chosen geographic area: takes a query, walks a third-party listings provider and persists deduplicated, enriched lead records."
+  },
+  "flow": {
+    "title": "Discovery & Enrichment Flow",
+    "description": "A search query is queued; a worker harvests listings through a rotating proxy pool; each listing is deduplicated and enriched before being persisted for API access.",
+    "domains": [
+      { "id": "ingest", "name": "Ingest", "description": "Query submission and access control.", "color": "#3b82f6" },
+      { "id": "harvest", "name": "Harvest", "description": "Workers, proxy pool and the third-party listings provider.", "color": "#f59e0b" },
+      { "id": "data", "name": "Leads Data", "description": "Deduped, enriched leads and their location metadata.", "color": "#10b981" }
+    ],
+    "steps": [
+      {
+        "id": "submit-query",
+        "title": "Submit Query",
+        "role": "entry",
+        "domain": "ingest",
+        "description": "Authenticated client submits a query (industry + geographic area). API key is checked.",
+        "inputs": ["industry", "area", "api key"],
+        "outputs": ["search job"],
+        "nextSteps": ["job-queue"]
+      },
+      {
+        "id": "job-queue",
+        "title": "Job Queue",
+        "role": "store",
+        "domain": "ingest",
+        "description": "Buffers pending searches so the harvester can scale horizontally.",
+        "inputs": ["search job"],
+        "outputs": ["queued job"],
+        "nextSteps": ["harvest-worker"]
+      },
+      {
+        "id": "harvest-worker",
+        "title": "Harvest Worker",
+        "role": "worker",
+        "domain": "harvest",
+        "description": "Picks a job, walks the listings provider through pagination, throttled by the proxy pool.",
+        "inputs": ["queued job"],
+        "outputs": ["raw listings"],
+        "nextSteps": ["proxy-pool", "listings-provider"]
+      },
+      {
+        "id": "proxy-pool",
+        "title": "Proxy Pool",
+        "role": "service",
+        "domain": "harvest",
+        "description": "Rotates outbound IPs so the provider doesn't rate-limit a single source.",
+        "inputs": ["outbound request"],
+        "outputs": ["proxied request"],
+        "nextSteps": ["listings-provider"]
+      },
+      {
+        "id": "listings-provider",
+        "title": "Listings Provider",
+        "role": "external",
+        "domain": "harvest",
+        "description": "Third-party business directory the harvester queries.",
+        "inputs": ["proxied request"],
+        "outputs": ["listings page"],
+        "nextSteps": ["dedupe-enrich"]
+      },
+      {
+        "id": "dedupe-enrich",
+        "title": "Dedupe & Enrich",
+        "role": "worker",
+        "domain": "data",
+        "description": "Drops listings we already have, normalises addresses and phone numbers, attaches a location fingerprint.",
+        "inputs": ["raw listings"],
+        "outputs": ["clean lead"],
+        "nextSteps": ["lead-store"]
+      },
+      {
+        "id": "lead-store",
+        "title": "Lead Store",
+        "role": "store",
+        "domain": "data",
+        "description": "Canonical store of leads. Indexed by location and query so the API can serve filtered slices.",
+        "inputs": ["clean lead"],
+        "outputs": ["lead record"],
+        "nextSteps": ["leads-api"]
+      },
+      {
+        "id": "leads-api",
+        "title": "Leads API",
+        "role": "output",
+        "domain": "data",
+        "description": "Read API serving filtered lead lists back to the client.",
+        "inputs": ["query", "filters"],
+        "outputs": ["lead page"],
+        "nextSteps": []
+      }
+    ]
+  }
+}

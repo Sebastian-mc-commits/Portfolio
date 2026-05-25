@@ -51,7 +51,8 @@ const AnimatedImageModal: React.FC<AnimatedImageModalProps> = ({ isOpen, onClose
                                     <Image
                                         src={image.src}
                                         alt={image.alt}
-                                        quality={95}
+                                        quality={85}
+                                        placeholder="blur"
                                         className="w-full h-48 object-cover rounded-lg"
                                     />
                                 </motion.div>
@@ -67,14 +68,21 @@ const AnimatedImageModal: React.FC<AnimatedImageModalProps> = ({ isOpen, onClose
                                 className="fixed inset-0 z-60 flex items-center justify-center bg-black bg-opacity-90"
                                 onClick={() => setSelectedImage(null)}
                             >
-                                <motion.img
-                                    src={selectedImage.src.src}
-                                    alt={selectedImage.alt}
+                                <motion.div
                                     initial={{ scale: 0.8 }}
                                     animate={{ scale: 1 }}
                                     exit={{ scale: 0.8 }}
-                                    className="max-w-full max-h-full object-contain"
-                                />
+                                    className="relative max-w-full max-h-full"
+                                >
+                                    <Image
+                                        src={selectedImage.src}
+                                        alt={selectedImage.alt}
+                                        quality={95}
+                                        placeholder="blur"
+                                        className="max-w-full max-h-full object-contain"
+                                        style={{ width: 'auto', height: 'auto' }}
+                                    />
+                                </motion.div>
                             </motion.div>
                         )}
                     </AnimatePresence>

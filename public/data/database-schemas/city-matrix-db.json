@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "locations-master",
+    "title": "Locations Master Data",
+    "description": "Canonical master dataset of geographic locations: each location with its identifiers, hierarchy and associated images, exposed via a thin lookup API to the rest of the platform."
+  },
+  "flow": {
+    "title": "Lookup & Enrichment Flow",
+    "description": "Other services call a lookup with a slug or coordinate. The service resolves the location, hydrates with its hierarchy and images, and returns a single canonical record.",
+    "domains": [
+      { "id": "api", "name": "API", "description": "External-facing lookup endpoints.", "color": "#3b82f6" },
+      { "id": "data", "name": "Data", "description": "The canonical location records and their images.", "color": "#10b981" }
+    ],
+    "steps": [
+      {
+        "id": "lookup-request",
+        "title": "Lookup Request",
+        "role": "entry",
+        "domain": "api",
+        "description": "A consuming service asks for a location by slug, id or coordinate.",
+        "inputs": ["location query"],
+        "outputs": ["resolved query"],
+        "nextSteps": ["resolver"]
+      },
+      {
+        "id": "resolver",
+        "title": "Location Resolver",
+        "role": "service",
+        "domain": "api",
+        "description": "Picks the right canonical location and walks its parent hierarchy (city → region → country).",
+        "inputs": ["resolved query"],
+        "outputs": ["base location"],
+        "nextSteps": ["location-store", "image-binder"]
+      },
+      {
+        "id": "location-store",
+        "title": "Location Store",
+        "role": "store",
+        "domain": "data",
+        "description": "Master table of locations with their identifiers and hierarchy.",
+        "inputs": ["lookup key"],
+        "outputs": ["location row"],
+        "nextSteps": []
+      },
+      {
+        "id": "image-binder",
+        "title": "Image Binder",
+        "role": "service",
+        "domain": "data",
+        "description": "Attaches the location's images (banner, thumbnail) onto the response.",
+        "inputs": ["base location"],
+        "outputs": ["enriched location"],
+        "nextSteps": ["lookup-response"]
+      },
+      {
+        "id": "lookup-response",
+        "title": "Lookup Response",
+        "role": "output",
+        "domain": "api",
+        "description": "Returns the canonical location to the caller.",
+        "inputs": ["enriched location"],
+        "outputs": ["location payload"],
+        "nextSteps": []
+      }
+    ]
+  }
+}

@@ -1,21 +1,26 @@
 
 const es = {
-  p_about: `Soy Sebastián Machado Cano, un desarrollador de software apasionado y 
-  solucionador de problemas dedicado que cree firmemente que la perseverancia y 
-  determinación pueden superar cualquier desafío técnico. Aunque puedo ser tímido 
-  y reservado por naturaleza, canalizo mi energía hacia la creación de soluciones 
-  innovadoras y escalables que hablan más fuerte que las palabras. Con experiencia 
-  sólida en el stack MERN (MongoDB, Express, Node.js y React), junto con Next.js, 
-  TypeScript y PHP con MySQL, he aprendido que el conocimiento técnico es solo la 
-  base, lo que realmente importa es el impulso incansable de hacer que las cosas 
-  funcionen, sin importar el esfuerzo requerido. Mi experiencia principal se centra 
-  en Python y desarrollo backend, donde aplico mi enfoque metódico y persistente 
-  para resolver problemas complejos. También disfruto explorando Rust como hobby. 
-  Conocido por mi adaptabilidad, visión de resolución de problemas a largo plazo 
-  y compromiso inquebrantable de llevar los proyectos 
-  hasta su finalización, poseo un título en "Análisis y Desarrollo de Sistemas de 
-  Información" y actualmente estoy cursando Ingeniería Informática. Puede que trabaje 
-  en silencio, pero entrego resultados que generan impacto.`,
+  p_about: `Soy Sebastián Machado Cano, desarrollador de software enfocado en backend que transforma
+  requerimientos de negocio complejos en sistemas escalables listos para producción. Me especializo
+  en Python con FastAPI, Celery para procesamiento de tareas asíncronas, y PostgreSQL para
+  arquitecturas de datos robustas. Mi experiencia se extiende al stack MERN con TypeScript,
+  desarrollo de plugins WordPress, e integración de servicios de Google Cloud. He construido
+  sistemas de ranking SEO que procesan conjuntos masivos de datos, plataformas de coordinación
+  automatizada de navegadores, y APIs empresariales de gestión de contratos con integración AWS S3.
+  Actualmente cursando Ingeniería Informática con título en Análisis y Desarrollo de Sistemas de
+  Información. Entrego resultados medibles: consultas de base de datos optimizadas, microservicios
+  escalables y soluciones de automatización que eliminan procesos manuales.`,
+
+  about_hero: "Desarrollador backend que construye sistemas confiables y listos para producción con Python, FastAPI y PostgreSQL.",
+
+  about_skill_backend: "Backend",
+  about_skill_backend_tech: "Python, FastAPI, Celery, PostgreSQL",
+  about_skill_fullstack: "Frontend",
+  about_skill_fullstack_tech: "React, TypeScript, Next.js",
+  about_skill_wordpress: "WordPress",
+  about_skill_wordpress_tech: "Plugins Personalizados, PHP, Hooks",
+  about_skill_cloud: "Cloud y DevOps",
+  about_skill_cloud_tech: "Google Cloud, Docker, Redis",
 
   presentation: `
   Hola, soy Sebastián Machado Cano, desarrollador de software 
@@ -79,15 +84,29 @@ const es = {
     Graduado en Análisis y Desarrollo de Software en Sistemas de Información
     `,
 
-  e_u_d_software_technician: `
-    Un año de experiencia como desarrollador de software,
-    auxiliar y líder técnico, gestionando proyectos con
-    enfoque organizado y realista.
+  e_u_d_lead_developer: `
+    Liderando equipos de desarrollo y arquitectando soluciones escalables en Geeks5g. Responsable
+    de decisiones técnicas, revisiones de código, mentoría a desarrolladores junior y asegurando
+    mejores prácticas en todos los proyectos. Gestionando múltiples proyectos de clientes
+    simultáneamente manteniendo altos estándares de calidad de código.
     `,
 
-  e_u_d_geeks5g: `
-    Actualmente trabajando como Desarrollador de Software en Geeks5g, especializándome en desarrollo backend y soluciones de automatización. 
-    Me enfoco en construir aplicaciones robustas del lado del servidor, implementar procesos automatizados y desarrollar arquitecturas backend escalables usando tecnologías modernas y mejores prácticas.
+  e_u_d_fullstack_developer: `
+    Desarrollé aplicaciones full-stack en Geeks5g, construyendo interfaces frontend con React/Next.js
+    y sistemas backend con FastAPI y PostgreSQL. Implementé flujos de trabajo automatizados, diseñé
+    arquitecturas escalables e integré servicios de terceros siguiendo las mejores prácticas de la industria.
+    `,
+
+  e_u_d_software_auxiliar: `
+    Trabajé como auxiliar de desarrollo de software en SENA, apoyando a desarrolladores senior en
+    la construcción y mantenimiento de aplicaciones. Adquirí experiencia práctica con metodologías
+    ágiles, control de versiones y prácticas de desarrollo colaborativo.
+    `,
+
+  e_u_d_software_intern: `
+    Completé prácticas en SENA como Técnico de Software. Aprendí prácticas fundamentales de
+    desarrollo, participé en proyectos reales y desarrollé habilidades en resolución de problemas
+    y colaboración en equipo.
     `,
 
   e_u_d_desktop_developer: `
@@ -99,6 +118,14 @@ const es = {
   Cursos adquiridos durante mi formación y experiencia como desarrollador de software.
   `,
 
+  e_t_lead_developer: "Líder de Desarrollo",
+  e_t_fullstack_developer: "Desarrollador Full Stack",
+  e_t_software_auxiliar: "Auxiliar de Desarrollo de Software",
+  e_t_software_intern: "Prácticas - Técnico de Software",
+  e_t_desktop_developer: "Desarrollador de Escritorio",
+  e_t_degree: "Análisis y Desarrollo de Software",
+  e_t_courses: "Cursos y Certificaciones",
+
   e_u_d_sintravid: `
   Sintravid es una empresa del sector salud que necesitaba mejorar la funcionalidad
   y el diseño de su sitio web desarrollado en WordPress. Entre los requerimientos estaban:
@@ -109,8 +136,15 @@ const es = {
   para este proyecto.
   `,
 
+  u_p_d_bookkeeping: `
+    Plataforma SaaS completa de impuestos y contabilidad para NextGen Taxman. Gestiona finanzas de clientes,
+    documentos fiscales, facturación y reportes financieros con funciones avanzadas de automatización. Construido con
+    arquitectura de microservicios usando Kafka para comunicación basada en eventos, procesamiento inteligente
+    de documentos, y tecnologías frontend modernas para una experiencia de usuario excepcional.
+    `,
+
   u_p_d_heatmap: `
-  Desarrollé un sistema sofisticado de análisis de ranking SEO similar a LocalDominator que analiza 
+  Desarrollé un sistema sofisticado de análisis de ranking SEO que analiza
   las posiciones de negocios para palabras clave específicas en ubicaciones geográficas. Dado una 
   palabra clave y coordenadas de negocio, el sistema clasifica ese negocio del 1 al 20 comparado 
   con competidores. No es una aplicación CRUD básica - requiere habilidades avanzadas de programación 
@@ -139,15 +173,54 @@ const es = {
   `,
 
   u_p_d_wordpress_ai: `
-  Estoy desarrollando un plugin inteligente de WordPress que aprovecha IA para generar automáticamente 
-  páginas, posts y estilos personalizados basados en configuraciones de usuario. El sistema programa 
-  la creación de contenido en intervalos especificados, asegurando actualizaciones consistentes del 
-  sitio web sin intervención manual. Esta solución de vanguardia combina generación de contenido 
-  con IA y automatización de WordPress, creando una herramienta poderosa para gestión de contenido 
+  Estoy desarrollando un plugin inteligente de WordPress que aprovecha IA para generar automáticamente
+  páginas, posts y estilos personalizados basados en configuraciones de usuario. El sistema programa
+  la creación de contenido en intervalos especificados, asegurando actualizaciones consistentes del
+  sitio web sin intervención manual. Esta solución de vanguardia combina generación de contenido
+  con IA y automatización de WordPress, creando una herramienta poderosa para gestión de contenido
   y mantenimiento de sitios web.
   `,
 
-  // Procesos de Desarrollo
+  u_p_d_lead_scrapper: `
+  Un poderoso servicio de generación de leads que extrae listados de Google My Business a nivel mundial.
+  El sistema permite buscar negocios por palabras clave y ubicaciones en cualquier país, extrayendo
+  datos valiosos incluyendo información de contacto, reseñas y detalles del negocio. Construido con
+  sofisticado control de tasas y rotación de proxies para asegurar recolección de datos confiable a escala.
+  `,
+
+  u_p_d_storage: `
+  Un sistema de almacenamiento backend versátil diseñado para almacenar y gestionar cualquier tipo de
+  información vía API. Incluye autenticación segura por API key, validación de URLs de acceso único
+  para proyectos externos, y validación de variables de entorno mediante trabajos cron programados.
+  Actúa como hub central para gestión de configuración entre múltiples proyectos.
+  `,
+
+  u_p_d_page_city_matrix: `
+  Un plugin de WordPress que genera automáticamente páginas de destino específicas por ubicación para
+  ciudades dentro de un radio definido. Usado para mejorar SEO local creando contenido único para cada
+  ciudad en Estados Unidos, ayudando a negocios a posicionar en búsquedas basadas en ubicación.
+  `,
+
+  u_p_d_blog_generator: `
+  Un sistema de generación de contenido de blog impulsado por IA que crea artículos únicos y optimizados
+  para SEO basados en datos específicos del sitio web. Cada publicación generada es única y adaptada
+  al nicho del sitio, asegurando contenido fresco que mejora rankings de búsqueda.
+  `,
+
+  u_p_d_content_creator: `
+  El backend inteligente que impulsa tanto el Generador de Blog como los plugins de Page City Matrix.
+  Utiliza bases de datos vectoriales para mejorar la unicidad del contenido y comparación semántica
+  de palabras clave. Procesa y genera contenido único evitando duplicación en todos los sitios conectados.
+  `,
+
+  u_p_d_city_matrix_db: `
+  Un servicio de base de datos integral que almacena y gestiona todos los datos de ciudades de EEUU
+  incluyendo coordenadas, población y metadatos. Incluye asignación de imágenes únicas por ciudad
+  y sirve como fuente central de datos para sistemas de generación de contenido basado en ubicación.
+  `,
+
+  dev_process_bookkeeping: "Construido con backend NestJS usando empaquetado Webpack y microservicios Kafka para arquitectura escalable basada en eventos. Implementé procesamiento inteligente de documentos y automatización de flujos de trabajo. Frontend desarrollado con Next.js 15 usando Turbopack, componentes Radix UI, DnD Kit para arrastrar y soltar, y React Hook Form. Infraestructura incluye PostgreSQL, caché Redis, AWS Cognito con Google OAuth, y SendGrid para notificaciones por email.",
+
   dev_process_bitac: "Construido usando Rust para operaciones backend críticas en rendimiento, Tauri para integración nativa de escritorio, y tecnologías web modernas para la interfaz de usuario. Implementé patrones de flujo de datos complejos y sistemas de respaldo automatizados.",
   dev_process_heatmap: "Desarrollado usando Python con FastAPI para endpoints API de alto rendimiento, PostgreSQL para datos relacionales complejos, Redis para caché, y Celery para procesamiento distribuido de tareas. Implementé algoritmos sofisticados para análisis geográfico y cálculos de ranking.",
   dev_process_trafficbot: "Construido con Python usando Selenium Grid para automatización distribuida de navegadores, Selenium Hub para coordinación, y Playwright para automatización web moderna. Implementé algoritmos sofisticados para cálculo de coordenadas, expansión de radio de búsqueda y distribución de metas mensuales.",
@@ -159,7 +232,11 @@ const es = {
   dev_process_bitcoin: "Construido usando Electron para despliegue multiplataforma de escritorio, Angular para componentes UI sofisticados, y Node.js para procesamiento de datos. Integré APIs de criptomonedas para obtención de datos en tiempo real e implementé visualización de gráficos para análisis histórico.",
   dev_process_classroom: "Desarrollado usando PHP para lógica del lado del servidor, JavaScript para interacciones dinámicas, MySQL para gestión de datos, y HTML/CSS para diseño responsivo. Implementé gestión de roles de usuario, algoritmos de programación y sistemas de notificación automatizados.",
 
-  // Desafíos
+  challenge_bookkeeping_1: "Implementar sincronización en tiempo real a través de microservicios Kafka",
+  challenge_bookkeeping_2: "Implementar procesamiento inteligente y categorización automática de documentos",
+  challenge_bookkeeping_3: "Construir arquitectura multi-tenant segura con AWS Cognito",
+  challenge_bookkeeping_4: "Optimizar rendimiento de Next.js 15 con Turbopack y formularios complejos",
+
   challenge_bitac_1: "Integrar backend de Rust con frontend de JavaScript a través de Tauri",
   challenge_bitac_2: "Implementar sistemas confiables de respaldo y sincronización",
   challenge_bitac_3: "Crear UI intuitiva para automatización de flujos de trabajo complejos",
@@ -180,7 +257,12 @@ const es = {
   challenge_wordpress_ai_3: "Asegurar calidad y relevancia del contenido generado",
   challenge_wordpress_ai_4: "Crear integración perfecta PHP-Python para plugins de WordPress",
 
-  // Características Clave
+  feature_bookkeeping_1: "Procesamiento y categorización de documentos con IA",
+  feature_bookkeeping_2: "Reportes financieros y analíticas en tiempo real",
+  feature_bookkeeping_3: "Facturación automatizada y seguimiento de pagos",
+  feature_bookkeeping_4: "Sistema de gestión de clientes multi-tenant",
+  feature_bookkeeping_5: "Integración de Google OAuth con AWS Cognito",
+
   feature_bitac_1: "Sincronización de datos en tiempo real",
   feature_bitac_2: "Sistemas de respaldo automatizados",
   feature_bitac_3: "Compatibilidad multiplataforma de escritorio",
@@ -196,19 +278,16 @@ const es = {
   feature_trafficbot_4: "Automatización distribuida multi-navegador",
   feature_trafficbot_5: "Patrones de interacción avanzados",
 
-  // Etiquetas del Panel Lateral
   side_panel_development_process: "Proceso de Desarrollo",
   side_panel_challenges: "Desafíos Técnicos",
   side_panel_key_features: "Características Clave",
 
-  // Contenido del Panel Lateral de Intro
   intro_side_panel_title: "Experiencia Técnica y Enfoque Profesional",
   intro_knowledge_title: "Conocimiento Técnico",
   intro_approach_title: "Enfoque de Desarrollo y Metodología",
   intro_ai_title: "Integración de IA en el Desarrollo",
   intro_specialties_title: "Especializaciones Principales",
 
-  // Elementos de Conocimiento
   knowledge_mern_title: "Desarrollo con MERN Stack",
   knowledge_mern_desc: "Experiencia integral en React, Express.js, TypeScript, Nest.js y MongoDB. Especializado en construir aplicaciones full-stack escalables con el ecosistema moderno de JavaScript. Historial comprobado en desarrollo colaborativo usando este stack tecnológico.",
   knowledge_mern_level: "Avanzado - Experiencia en Producción",
@@ -241,7 +320,6 @@ const es = {
   knowledge_docker_desc: "Competente en construir imágenes Docker para aplicaciones containerizadas y orquestar arquitecturas multi-servicio usando Docker Compose. Experiencia en crear entornos de contenedores listos para desarrollo y producción.",
   knowledge_docker_level: "Intermedio - Listo para Producción",
 
-  // Enfoque de Trabajo
   approach_breakdown_title: "Estrategia de Descomposición de Proyectos",
   approach_breakdown_desc: "Descompongo sistemáticamente proyectos complejos en problemas manejables de propósito único y características. Este enfoque comienza con análisis exhaustivo de requerimientos, seguido de investigación de soluciones existentes y APIs, antes de decidir si integrar o construir soluciones personalizadas.",
 
@@ -251,7 +329,6 @@ const es = {
   approach_template_title: "Arquitectura Security-First",
   approach_template_desc: "Implemento una plantilla estandarizada con arquitectura Roles → Permisos → Usuarios → API Keys desde el inicio. Este enfoque reconoce que la mayoría de aplicaciones requieren gestión de usuarios, control de acceso basado en roles y acceso seguro a APIs, estableciendo estas bases inmediatamente.",
 
-  // Uso de IA
   ai_efficiency_title: "Integración Estratégica de IA",
   ai_efficiency_desc: "Aprovecho las herramientas de IA estratégicamente para mejorar la eficiencia de desarrollo, permitiéndome enfocarme en características complejas de alto valor. La IA asiste con tareas rutinarias mientras mantengo control sobre la arquitectura e implementación de lógica de negocio crítica.",
 
@@ -261,7 +338,6 @@ const es = {
   ai_boundaries_title: "Mantenimiento de Calidad de Código",
   ai_boundaries_desc: "Nunca delego la creación completa de características a IA, ya que esto lleva a código difícil de mantener y comportamientos inesperados. En su lugar, uso IA para asistencia dirigida mientras mantengo control arquitectónico y estándares de calidad de código.",
 
-  // Especialidades
   specialty_backend_title: "Arquitectura Backend y Administración de Base de Datos",
   specialty_backend_desc: "Aunque soy capaz de desarrollo full-stack, mi experiencia se centra en arquitectura backend y administración de base de datos. Sobresalgo en diseñar sistemas backend escalables y seguros que forman la fundación de aplicaciones robustas.",
 
@@ -282,7 +358,12 @@ const esButtons = {
   b_view_website: "Ver Sitio Web",
   b_view_repository: "Ver Repositorio",
   b_watch_demo: "Ver Demo",
-  b_close: "Cerrar"
+  b_close: "Cerrar",
+  b_view_details: "Ver Detalles",
+  b_view_database: "Explora cómo funciona este sistema — diagrama de flujo paso a paso",
+  b_back_to_projects: "Volver a Proyectos",
+  b_view_all_skills: "Ver todas las habilidades",
+  b_collapse: "Colapsar"
 }
 
 const esTitles = {
@@ -291,6 +372,7 @@ const esTitles = {
   t_skills: "Mis habilidades",
   t_experience: "Mi experiencia profesional",
   t_contact: "Contáctame",
+  u_p_t_bookkeeping: "NextGen Taxman · Plataforma Contable",
   u_p_t_chatbot: "Chatbot Inteligente Automatizado",
   u_p_t_e_commerce: "Sistema de Ecommerce Integrador",
   u_p_t_bitcoin: "Aplicación de Monitoreo de Bitcoin",
@@ -299,8 +381,14 @@ const esTitles = {
   u_p_t_trafficbot: "Bot de Tráfico para Google Maps",
   u_p_t_contracts_api: "API de Firma de Contratos",
   u_p_t_wordpress_ai: "Constructor WordPress con IA",
-  t_w_tag: "Desarrollo para trabajo",
-  t_p_tag: "Desarrollado como práctica",
+  u_p_t_lead_scrapper: "Servicio de Extracción de Leads",
+  u_p_t_storage: "Servicio de Almacenamiento API",
+  u_p_t_page_city_matrix: "Plugin Page City Matrix",
+  u_p_t_blog_generator: "Generador de Blog con IA",
+  u_p_t_content_creator: "Backend de Creación de Contenido",
+  u_p_t_city_matrix_db: "Base de Datos City Matrix",
+  t_w_tag: "Proyecto empresarial",
+  t_p_tag: "Proyecto Personal",
   t_c_tag: "Proyecto para Cliente",
   t_project_difficulty: "Dificultad",
   t_project_type: "Tipo de Proyecto",
@@ -308,7 +396,23 @@ const esTitles = {
   t_project_links: "Enlaces",
   t_project_gallery: "Galería",
   t_project_stats: "Estadísticas del Proyecto",
-  t_images_count: "Imágenes"
+  t_images_count: "Imágenes",
+
+  quick_summary_badge: "Resumen Rápido",
+  quick_summary_role: "Desarrollador de Software Backend",
+  quick_summary_about_title: "Resumen",
+  quick_summary_about: "Desarrollador backend que trabaja con Python, FastAPI y PostgreSQL. Construyo servicios confiables en producción apoyados en procesos asíncronos en segundo plano, capas de caché e infraestructura en la nube, colaborando con equipos para entregar código limpio y mantenible.",
+  quick_summary_skills_title: "Tecnologías Principales",
+  quick_summary_projects_title: "Proyectos Destacados",
+  quick_summary_see_more: "Ver portafolio completo",
+  quick_summary_experience_title: "Experiencia",
+  quick_summary_education_title: "Educación",
+  quick_summary_education_degree: "Ingeniería Informática",
+  quick_summary_education_status: "En progreso",
+  quick_summary_education_degree_2: "Tecnología en Análisis y Desarrollo de Sistemas de Información",
+  quick_summary_education_status_2: "Completado",
+  quick_summary_languages_title: "Idiomas",
+  quick_summary_code_title: "Competencia en Código"
 }
 
 const esPlaceholders = {

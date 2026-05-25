@@ -7,10 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import SidePanel from '@/components/SidePanel'
 import { IoMdClose } from 'react-icons/io'
 import Image from 'next/image'
+import { I_Image } from '@/lib/interfaces/ui'
 
 function ExperienceItem(item: IExperience) {
     const [isSidePanelOpened, setIsSidePanelOpened] = useState(false)
-    const [selectedImage, setSelectedImage] = useState<any>(null)
+    const [selectedImage, setSelectedImage] = useState<I_Image | null>(null)
     const { t } = useTranslation()
     const { theme } = useTheme();
 
@@ -39,8 +40,15 @@ function ExperienceItem(item: IExperience) {
                     fontSize: "1.5rem",
                 }}
             >
-                <h3 className="font-semibold capitalize">{item.title}</h3>
-                <p className="!mt-1 !font-normal text-gray-700 dark:text-white/75">
+                <h3 className="font-semibold capitalize">
+                    {item.titleTranslationKey ? t(item.titleTranslationKey) : item.title}
+                </h3>
+                {item.company && (
+                    <p className="!mt-0 text-sm text-gray-500 dark:text-gray-400">
+                        {item.company}
+                    </p>
+                )}
+                <p className="!mt-2 !font-normal text-gray-700 dark:text-white/75">
                     {t(item.descriptionTranslationKey)}
                 </p>
 
@@ -56,7 +64,6 @@ function ExperienceItem(item: IExperience) {
                 }
             </VerticalTimelineElement>
 
-            {/* Enhanced SidePanel Modal for Images */}
             <SidePanel
                 isOpen={isSidePanelOpened}
                 onClose={() => {
@@ -73,12 +80,16 @@ function ExperienceItem(item: IExperience) {
                 className="bg-white dark:bg-gray-900"
             >
                 <div className="h-full flex flex-col">
-                    {/* Header */}
                     <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                         <div>
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                                {item.title}
+                                {item.titleTranslationKey ? t(item.titleTranslationKey) : item.title}
                             </h2>
+                            {item.company && (
+                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                    {item.company}
+                                </p>
+                            )}
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                                 {item.date}
                             </p>
@@ -94,9 +105,7 @@ function ExperienceItem(item: IExperience) {
                         </button>
                     </div>
 
-                    {/* Content */}
                     <div className="flex-1 overflow-y-auto p-6">
-                        {/* Description */}
                         <div className="mb-8">
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                                 {t("about") || "About"}
@@ -106,7 +115,6 @@ function ExperienceItem(item: IExperience) {
                             </p>
                         </div>
 
-                        {/* Images Grid */}
                         {item.type === "degrees_images" && item.images && item.images.length > 0 && (
                             <div>
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -125,7 +133,8 @@ function ExperienceItem(item: IExperience) {
                                                 <Image
                                                     src={image.src}
                                                     alt={image.alt}
-                                                    quality={95}
+                                                    quality={85}
+                                                    placeholder="blur"
                                                     className="w-full h-48 object-contain bg-gray-50 dark:bg-gray-800 group-hover:scale-105 transition-transform duration-300"
                                                 />
                                                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
@@ -146,7 +155,6 @@ function ExperienceItem(item: IExperience) {
                 </div>
             </SidePanel>
 
-            {/* Full-size Image Modal */}
             <AnimatePresence>
                 {selectedImage && (
                     <motion.div
@@ -167,7 +175,8 @@ function ExperienceItem(item: IExperience) {
                             <Image
                                 src={selectedImage.src}
                                 alt={selectedImage.alt}
-                                quality={100}
+                                quality={95}
+                                placeholder="blur"
                                 className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                             />
                             <button

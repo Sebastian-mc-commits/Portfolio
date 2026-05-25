@@ -16,19 +16,22 @@ type BaseUserUserProject = {
     images: I_Image[];
     translationKey: string;
     type: UserProjectsStates;
-    link: string;
+    link?: string;
     videoLink?: string;
-    linkType: "github" | "website";
+    databaseSchemaFile?: string;
+    linkType?: "github" | "website" | "none";
     backgroundColor?: string;
+    bgColor?: string;
+    bg?: string;
     metadata: {
         difficultyLevel: "easy" | "medium" | "hard";
         difficultyRankNumber: number;
         description: string;
+        isFeatured?: boolean;
         technologiesUsed?: ReactNode[];
         developmentProcessKey?: string;
         challengesKeys?: string[];
         keyFeaturesKeys?: string[];
-        // Legacy fields for backward compatibility
         developmentProcess?: string;
         challenges?: string[];
         keyFeatures?: string[];

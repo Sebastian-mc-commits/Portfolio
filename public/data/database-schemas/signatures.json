@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "explanation-flow.v2",
+  "project": {
+    "id": "e-signature-service",
+    "title": "Contract & E-Signature Service",
+    "description": "Enterprise contract-signing API: prepare a contract, route it to signers, capture each signature, and store a tamper-evident final artifact."
+  },
+  "flow": {
+    "title": "Contract Signing Flow",
+    "description": "A drafted contract is dispatched to one or more signers; each signature is captured with audit metadata; once everyone has signed, the system seals the final document and stores it.",
+    "domains": [
+      { "id": "identity", "name": "Identity & Access", "description": "Authenticates owners and signers (a signer may not be a registered user).", "color": "#3b82f6" },
+      { "id": "contract", "name": "Contract Lifecycle", "description": "Creating, routing, signing and sealing contracts.", "color": "#8b5cf6" },
+      { "id": "storage", "name": "Storage & Audit", "description": "Persists artefacts and the audit trail.", "color": "#10b981" }
+    ],
+    "steps": [
+      {
+        "id": "create-contract",
+        "title": "Create Contract",
+        "role": "entry",
+        "domain": "contract",
+        "description": "Owner uploads a contract template, defines the signing fields and the list of signers.",
+        "inputs": ["contract template", "signer list"],
+        "outputs": ["draft contract"],
+        "nextSteps": ["dispatch-service"]
+      },
+      {
+        "id": "dispatch-service",
+        "title": "Dispatch Service",
+        "role": "service",
+        "domain": "contract",
+        "description": "Issues a one-time signed link per signer and emails it. Each link grants scoped access to that signer's fields only.",
+        "inputs": ["draft contract"],
+        "outputs": ["signer links"],
+        "nextSteps": ["signer-portal"]
+      },
+      {
+        "id": "signer-portal",
+        "title": "Signer Portal",
+        "role": "entry",
+        "domain": "identity",
+        "description": "Signer opens the link; identity is verified via the token (optionally a second factor).",
+        "inputs": ["signer link", "signer credentials"],
+        "outputs": ["signer session"],
+        "nextSteps": ["signature-capture"]
+      },
+      {
+        "id": "signature-capture",
+        "title": "Signature Capture",
+        "role": "service",
+        "domain": "contract",
+        "description": "Captures the signature, timestamp, IP and user-agent, and records an audit event.",
+        "inputs": ["signer session", "signature payload"],
+        "outputs": ["signature event"],
+        "nextSteps": ["audit-store", "completion-checker"]
+      },
+      {
+        "id": "completion-checker",
+        "title": "Completion Checker",
+        "role": "worker",
+        "domain": "contract",
+        "description": "Watches for the last required signature. Once everyone has signed, hands off to the sealer.",
+        "inputs": ["signature event"],
+        "outputs": ["completed contract"],
+        "nextSteps": ["seal-worker"]
+      },
+      {
+        "id": "seal-worker",
+        "title": "Seal Worker",
+        "role": "worker",
+        "domain": "contract",
+        "description": "Composes a final PDF with all signatures and the audit log, hashes it and stores the hash for tamper detection.",
+        "inputs": ["completed contract", "audit trail"],
+        "outputs": ["sealed pdf", "content hash"],
+        "nextSteps": ["blob-store", "contract-store"]
+      },
+      {
+        "id": "blob-store",
+        "title": "Blob Store",
+        "role": "store",
+        "domain": "storage",
+        "description": "Object storage for the final signed PDF.",
+        "inputs": ["sealed pdf"],
+        "outputs": ["object reference"],
+        "nextSteps": []
+      },
+      {
+        "id": "audit-store",
+        "title": "Audit Store",
+        "role": "store",
+        "domain": "storage",
+        "description": "Append-only log of every signer interaction (open, decline, sign).",
+        "inputs": ["signature event"],
+        "outputs": ["audit row"],
+        "nextSteps": []
+      },
+      {
+        "id": "contract-store",
+        "title": "Contract Store",
+        "role": "store",
+        "domain": "storage",
+        "description": "Indexed metadata about the contract: owner, signers, status, hash. Powers list/search APIs.",
+        "inputs": ["completed contract", "content hash"],
+        "outputs": ["contract record"],
+        "nextSteps": []
+      }
+    ]
+  }
+}
