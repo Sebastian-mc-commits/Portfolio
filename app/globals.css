@@ -84,6 +84,10 @@ html.dark {
 }
 */
 
+/* Hide scrollbar utility for compact horizontal menus on mobile */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 /* Disable hyphenation in large text and titles so words never break with a "-" */
 h1, h2, h3, h4, h5, h6,
 .text-2xl, .text-3xl, .text-4xl,

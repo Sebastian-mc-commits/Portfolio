@@ -42,8 +42,13 @@ const bgClassToColor: Record<string, string> = {
   "bg-indigo-600": "#4f46e5",
 };
 
-const CARDS_PER_VIEW = 3;
 const CARD_GAP_PX = 16;
+
+function cardsPerViewForWidth(vw: number): number {
+  if (vw < 640) return 1;
+  if (vw < 1024) return 2;
+  return 3;
+}
 
 interface HorizontalScrollGalleryProps {
   projects: IUserProjects[];
@@ -66,11 +71,12 @@ interface ProjectCardProps {
   index: number;
   total: number;
   cardWidth: number;
+  cardsPerView: number;
   scrollYProgress: MotionValue<number>;
   t: (key: string) => string;
 }
 
-function ProjectCard({ project, index, total, cardWidth, scrollYProgress, t }: ProjectCardProps) {
+function ProjectCard({ project, index, total, cardWidth, cardsPerView, scrollYProgress, t }: ProjectCardProps) {
   const { setTransitionOrigin } = useTransitionOrigin();
   const isMounted = useContext(MountedContext);
   const { images, tags, id, translationKey, metadata } = project;
@@ -79,8 +85,8 @@ function ProjectCard({ project, index, total, cardWidth, scrollYProgress, t }: P
   const coreStack = tags.slice(0, 3);
   const bgColorValue = getProjectBgColor(project);
 
-  const totalSections = Math.ceil(total / CARDS_PER_VIEW);
-  const sectionIndex = Math.floor(index / CARDS_PER_VIEW);
+  const totalSections = Math.ceil(total / cardsPerView);
+  const sectionIndex = Math.floor(index / cardsPerView);
   const sectionStart = sectionIndex / totalSections;
   const sectionEnd = (sectionIndex + 1) / totalSections;
 
@@ -209,7 +215,7 @@ export function HorizontalScrollGallery({
 }: HorizontalScrollGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { setActiveSection } = useActiveSectionContext();
-  const [dimensions, setDimensions] = useState({ viewportWidth: 1920, cardWidth: 600 });
+  const [dimensions, setDimensions] = useState({ viewportWidth: 1920, cardWidth: 600, cardsPerView: 3 });
   const [isMounted, setIsMounted] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [isInView, setIsInView] = useState(false);
@@ -221,10 +227,12 @@ export function HorizontalScrollGallery({
   useEffect(() => {
     const updateDimensions = () => {
       const vw = window.innerWidth;
-      const totalGaps = (CARDS_PER_VIEW - 1) * CARD_GAP_PX;
-      const availableWidth = vw - 80;
-      const cardW = (availableWidth - totalGaps) / CARDS_PER_VIEW;
-      setDimensions({ viewportWidth: vw, cardWidth: cardW });
+      const cardsPerView = cardsPerViewForWidth(vw);
+      const sidePadX = vw < 640 ? 32 : 80;
+      const totalGaps = (cardsPerView - 1) * CARD_GAP_PX;
+      const availableWidth = vw - sidePadX;
+      const cardW = (availableWidth - totalGaps) / cardsPerView;
+      setDimensions({ viewportWidth: vw, cardWidth: cardW, cardsPerView });
     };
 
     updateDimensions();
@@ -237,9 +245,9 @@ export function HorizontalScrollGallery({
     offset: ["start start", "end end"],
   });
 
-  const totalSections = Math.ceil(projects.length / CARDS_PER_VIEW);
+  const totalSections = Math.ceil(projects.length / dimensions.cardsPerView);
   const totalCardsWidth = projects.length * dimensions.cardWidth + (projects.length - 1) * CARD_GAP_PX;
-  const visibleWidth = CARDS_PER_VIEW * dimensions.cardWidth + (CARDS_PER_VIEW - 1) * CARD_GAP_PX;
+  const visibleWidth = dimensions.cardsPerView * dimensions.cardWidth + (dimensions.cardsPerView - 1) * CARD_GAP_PX;
   const endPadding = dimensions.cardWidth * 2;
   const maxScrollDistance = totalCardsWidth - visibleWidth + endPadding;
   const sidePadding = (dimensions.viewportWidth - visibleWidth) / 2;
@@ -381,6 +389,7 @@ export function HorizontalScrollGallery({
                 index={index}
                 total={projects.length}
                 cardWidth={dimensions.cardWidth}
+                cardsPerView={dimensions.cardsPerView}
                 scrollYProgress={scrollYProgress}
                 t={t}
               />

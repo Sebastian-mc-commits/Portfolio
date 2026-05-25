@@ -235,9 +235,9 @@ export default function QuickSummary({ onScrollDown }: QuickSummaryProps) {
             transition={{ duration: 0.5 }}
         >
             <motion.div className="h-full flex" animate={controls}>
-                {/* LEFT SIDE - Summary Content */}
+                {/* LEFT SIDE - Summary Content (full width on mobile) */}
                 <motion.div
-                    className="w-1/2 h-full flex flex-col bg-white dark:bg-gray-950 relative overflow-hidden"
+                    className="w-full md:w-1/2 h-full flex flex-col bg-white dark:bg-gray-950 relative overflow-hidden"
                     initial={{ x: "-100%" }}
                     animate={{ x: 0 }}
                     transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1], delay: 0.1 }}
@@ -446,9 +446,9 @@ export default function QuickSummary({ onScrollDown }: QuickSummaryProps) {
                     </div>
                 </motion.div>
 
-                {/* RIGHT SIDE - Code Editor */}
+                {/* RIGHT SIDE - Code Editor (hidden on mobile) */}
                 <motion.div
-                    className="w-1/2 h-full bg-[#0d1117] flex flex-col"
+                    className="hidden md:flex md:w-1/2 h-full bg-[#0d1117] flex-col"
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}
                     transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
